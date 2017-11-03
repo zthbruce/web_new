@@ -1,0 +1,11 @@
+*.db
+out
+.idea/
+.DS_Store
+test
+META-INF/
+node_modules/*
+*.zip
+*.log
+*.iml
+

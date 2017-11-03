@@ -1,0 +1,113 @@
+/*航线管理*/
+
+/*航线左下列表操作*/
+#route_Show>.route_Info_btn{background:url('/icon/route.png') no-repeat 4px 4px;}
+#route_Show>.route_Info_btn:hover{background-position:-24px 4px;}
+#route_Show>.route_Info_btn:active{background-position:-52px 4px;}
+.route_List_ul{background:rgba(0,0,0,0.8);position:absolute;border-radius:2px;display:none;}
+.route_List_ul>li{height:30px;cursor:pointer;line-height:30px;color:#fff;font-size:14px;padding-left:10px;}
+.route_List_ul>li:hover{background:#217BA2;}
+.route_List_ul>li.choose{background:#217BA2;}
+.routeType_list{width:80px;bottom:40px;left:40px;}
+.routeType_list>li>i{display:inline-block;width:0px;height:0px;border:4px solid transparent;border-left-color:#eee;float:right;margin-top:12px;}
+.oneRoute_List{width:130px;bottom:40px;left:120px;}
+.oneRoute_List>li{font-size:12px;}
+
+/*航线信息管理弹出框*/
+#routeInfo{width:500px;height:455px;position:fixed;z-index:100;top:70px;left:300px;border-radius: 10px;background: rgba(6, 2, 5, 0.8);display:none;}
+.routeStartEnd{width:96%;height:110px;margin:5px auto;}
+.routeDes{width:96%;height:160px;margin:5px auto;}
+.routeInstall_Btn{width:96%;height:30px;margin:5px auto;}
+
+/*起终点选择*/
+.routeStartEnd>div{font-size:14px;color:#fff;width:94%;margin:0px auto 5px;height:20px;}
+.routePort_Select>div{display:inline-block;width:49%;height:20px;line-height:20px;}
+.routePort_Select i{display:inline-block;width:14px;height:14px;margin-left:5px;background:url('/images/placeholder.png') no-repeat;position:relative;top:2px;cursor:pointer;}
+/*.routePoint_infoShow{display:inline-block;margin-left:10px;height:20px;line-height:20px;}*/
+.routePoint_infoShow{display:inline-block;margin-left:10px;height:18px;line-height:18px;width:90px;background:transparent;border:1px solid #fff;border-radius:5px;color:#fff;padding-left:5px;}
+
+/*出发港、目的港列表选择*/
+.routeStartEnd>.routeStartEndPort{height:40px;position:relative;}
+.routeStartEndPort>span{display:inline-block;height:40px;line-height:24px;overflow:hidden;}
+.routeStartEndPort>span:nth-child(2){width:370px;height:40px;cursor:auto;white-space:nowrap;overflow-x:scroll;}
+.StartEndPort_List{width:5000px;}
+.StartEndPort_List>li{float:left;display:inline-block;height:18px;margin-top:2px;margin-left:5px;padding:0px 5px;border:1px solid #989898;border-radius:5px;background: rgba(255,255,255,0.2)}
+.StartEndPort_List>li>span{display:inline-block;height:18px;line-height:18px;font-size:12px;margin-right:6px;position:relative;top:-4px;}
+.StartEndPort_List>li>i{display:inline-block;width:11px;height:11px;position:relative;top:-2px;background:url("/images/cancel.png") no-repeat;cursor:pointer;}
+.StartEndPort_List>li>i:hover{background:url("/images/cancel-hover.png") no-repeat;}
+.StartEndPort_List>.add_Port{background: rgba(255,255,255,0.2);cursor: pointer;}
+.add_Port:hover{background: rgba(157, 157, 157, 0.70);}
+.AllStartEndPort_List{width:372px;position:absolute;z-index:1000;max-height:140px;padding-top:30px;left:60px;top:40px;display:none;background:rgba(6, 2, 5, 0.8);;border-radius:5px;}
+.AllStartEndPort_List>ul{width:372px;max-height:120px;margin-top:5px;display:block;overflow:hidden;overflow-y:scroll;}
+.AllStartEndPort_List>ul>li{color: #c0c6c8;width:100%;height:20px;font-size:12px;padding-left:5px;font-weight: 500;cursor:pointer;}
+.AllStartEndPort_List>ul>li:hover{background:#217BA2;}
+.AllStartEndPort_List>.StartEndPort_input{display:inline-block;width:333px;height:20px;line-height:20px;border-radius:3px;position:absolute;top:5px;left:10px;padding-left:5px;font-size:12px;border:1px solid #989898;font-weight:500;}
+
+
+/*标准信息管理*/
+.routeInfo_Install{width:96%;height:70px;margin:5px auto;}
+.routeInfo_List{padding-top:1px;}
+.routeInfo_List>li{display:inline-block;height:20px;font-size:13px;color:#fff;margin:0px 7px 0px;padding-right:2px;overflow:hidden;}
+.routeInfo_List>li:nth-child(3){display:inline-block;height:20px;font-size:13px;color:#fff;margin-right:12px;padding-right:2px;overflow:hidden;}
+
+.routeInfo_List>li>input{width:40px;height:16px;line-height:16px;padding-left:5px;border:1px solid #ccc;background:transparent;color:#fff;border-radius:5px;}
+.routeInfo_List>li:first-child>input,.routeInfo_List>li:nth-child(7)>input, .routeInfo_List>li:nth-child(8)>input,.routeInfo_List>li:nth-child(12)>input,.routeInfo_List>li:nth-child(13)>input{width:50px;}
+
+/*.routeInfo_List>li:nth-child(6)>input,.routeInfo_List>li:nth-child(10)>input{width:30px;}*/
+/*.routeInfo_List>li:nth-child(8),.routeInfo_List>li:nth-child(12){width:110px;}*/
+.routeInfo_List>li:nth-child(9)>input,.routeInfo_List>li:nth-child(14)>input{width:14px;height:14px;cursor:pointer;position:relative;top:3px;}
+
+/*中英文说明*/
+.routeDes>div{display:inline-block;width:49%;height:160px;font-size:14px;color:#fff;text-align:center;}
+.routeDes>div>textarea{display:inline-block;width:96%;height:140px;font-size:13px;margin-left:5px;resize:none;overflow-y:scroll;}
+
+/*按钮操作*/
+.routeInstall_Btn>div{display:inline-block;margin-left:100px;cursor:pointer;width:80px;height:30px;line-height:30px;text-align:center;background:#2EB1EA;border-radius:5px;color:#fff;font-size:14px;}
+.routeInstall_Btn>div:hover{background:#00B7FF;}
+.routeInstall_Btn>div:active{background:#217BA2;}
+
+
+/*期租航线弹出框样式*/
+#LeaseRouteInfo{width:570px;height:510px;position:fixed;z-index:100;top:70px;left:300px;border-radius: 10px;background: rgba(6, 2, 5, 0.8);display:none;}
+/*期租交船港、还船港选择*/
+#LeaseRouteInfo .routeStartEnd{width:96%;height:132px;margin:5px auto;}
+#LeaseRouteInfo .routeStartEnd>div{font-size:14px;color:#fff;width:98%;margin:0px auto 5px;height:40px;}
+#LeaseRouteInfo .routeStartEnd>.routePort_Select>div{width:100%;margin-bottom:5px;}
+#LeaseRouteInfo .routeStartEnd .routePoint_infoShow{font-size:12px;width:200px;}
+#LeaseRouteInfo .routeStartEnd .routeStartEndPort>span:nth-child(1){line-height:40px;height:40px;}
+#LeaseRouteInfo .routeStartEnd .routeStartEndPort>span:nth-child(2){width:460px;}
+/*信息管理*/
+.LeaseRouteInfo_List>li>i{display:inline-block;width:14px;height:14px;background:url('/images/placeholder.png') no-repeat;position:relative;top:2px;left:-10px;cursor:pointer;}
+.LeaseRouteInfo_Install{width:96%;height:102px;margin:5px auto;}
+.LeaseRouteInfo_List{padding-top:1px;}
+.LeaseRouteInfo_List>li{display:inline-block;width:115px;min-width:110px;height:22px;font-size:13px;color:#fff;margin:0px 7px 3px;padding-right:2px;}
+.LeaseRouteInfo_List>li>span{display:inline-block;height:22px;line-height:22px;}
+.LeaseRouteInfo_List>li>input{width:40px;height:16px;line-height:16px;padding-left:5px;border:1px solid #ccc;position:relative;top:-1px;background:transparent;color:#fff;border-radius:5px;}
+/*.LeaseRouteInfo_List>li:nth-child(1){width:248px;position:relative;}*/
+.LeaseRouteInfo_List>li:nth-child(3)>input{width:20px;}
+.LeaseRouteInfo_List>li:nth-child(4)>input{width:20px;}
+.LeaseRouteInfo_List>li:nth-child(5)>input{width:50px;}
+.LeaseRouteInfo_List>li:nth-child(6)>input{width:50px;}
+.LeaseRouteInfo_List>li:nth-child(7)>input{width:52px;}
+.LeaseRouteInfo_List>li:nth-child(8)>input{width:45px;}
+.LeaseRouteInfo_List>li:nth-child(10)>input{display:inline-block;width:14px;height:14px;position:relative;top:3px;}
+/*中英文说明*/
+.LeaseRouteDes{width:96%;margin:5px auto 2px;}
+.LeaseRouteDes>div{display:inline-block;width:268px;height:160px;font-size:14px;color:#fff;text-align:center;}
+.LeaseRouteDes>div>textarea{display:inline-block;width:96%;height:140px;font-size:13px;margin-left:5px;resize:none;overflow-y:scroll;}
+/*按钮操作*/
+.LeaseRouteInstall_Btn>div{display:inline-block;margin-top:8px;margin-left:135px;cursor:pointer;width:80px;height:30px;line-height:30px;text-align:center;background:#2EB1EA;border-radius:5px;color:#fff;font-size:14px;}
+.LeaseRouteInstall_Btn>div:hover{background:#00B7FF;}
+.LeaseRouteInstall_Btn>div:active{background:#217BA2;}
+/*期租货物选择*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>span:nth-child(2){height:16px;line-height:16px;padding-left:5px;border:1px solid #ccc;position:relative;top:1px;background:transparent;color:#fff;border-radius:5px;width:200px;font-size:12px;cursor:pointer;}*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>span:nth-child(2)>input{width:178px;height:16px;line-height:16px;background:transparent;position:relative;top:-1px;border:transparent;font-size:12px;cursor:pointer;color:#fff;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>span:nth-child(2)>span{display:inline-block;position:absolute;height:15px;line-height:15px;color:#fff;font-size:12px;right:10px;}*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>ul{width:205px;max-height:100px;position:absolute;z-index:1000;cursor:pointer;top:20px;left:40px;background:#fff;border-radius:5px;overflow:hidden;display:none;}*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>ul>li{width:100%;height:20px;font-size:12px;color:#323232;padding-left:5px;font-weight: 300;}*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>ul>li:hover{background:#2EB1EA;color:#fff;}*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>ul>li label{display:inline-block;cursor:pointer;width:100%;}*/
+/*.LeaseRouteInfo_List>li:nth-child(1)>ul>li input{position:relative;top:3px;}*/
+
+
+

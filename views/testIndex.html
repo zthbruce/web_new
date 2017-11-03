@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>地图</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/basicSkills.css' />
+    <link rel='stylesheet' href='/stylesheets/portInfo.css' />
+    <link rel='stylesheet' href='/stylesheets/voyage.css' />
+    <link rel='stylesheet' href='/stylesheets/newberth.css' />
+    <link rel='stylesheet' href='/stylesheets/fleet.css' />
+    <link rel='stylesheet' href='/stylesheets/voyageManagement.css' />
+    <link rel='stylesheet' href='/stylesheets/standardRoute.css' />
+    <link rel="stylesheet" href="/stylesheets/datePicker/ion.calendar.css">
+    <!--<link rel="stylesheet" href="http://openlayers.org/en/v3.17.1/css/ol.css" type="text/css">-->
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.1.1/css/ol.css" type="text/css">
+    <!--<link rel="stylesheet" href="/stylesheets/openlayer/v4.1.1/css/ol.css">-->
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
+    <script src="http://openlayers.org/en/v3.17.1/build/ol.js" type="text/javascript"></script>
+    <!--<script type="text/javascript" src="/javascripts/openlayer/v4.1.1/build/ol.js"></script>-->
+    <script type="text/javascript" src="/javascripts/blmMap.js"></script>
+    <script type="text/javascript" src="/javascripts/blmDraw.js"></script>
+    <script type="text/javascript" src="/javascripts/blmMarker.js"></script>
+    <script type="text/javascript" src="/javascripts/blmLayer.js"></script>
+    <script type="text/javascript" src="/javascripts/blmOperate.js"></script>
+    <script type="text/javascript" src="/javascripts/blmBind.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/WGS84transformer.js"></script>
+    <script type="text/javascript" src="/javascripts/style.js"></script>
+</head>
+<body style="overflow:hidden;">
+<div id="map" class="map" tabindex="0" ></div>
+<!--<map id="map" class="map"></map>-->
+<div id="optain_topLeft_text"></div>
+<div id="mouse_rightBottom_text"></div>
+<div id="right_tool">
+    <div id="right_tool_btn"></div>
+    <div id="right_tool_content">
+        <ul class="basic_tool">
+            <li class="switch_map"><b></b>
+                <div class="right_basic_map">
+                    <div class="basic_map_list">
+                        <div class="map_mouse_select" id="ditu">地图</div>
+                        <div id="weitu">卫图</div>
+                        <div id="haitu">海图</div>
+                    </div>
+                </div>
+            </li>
+            <li class="obtain_coordinate"><b></b>
+                <div class="obtain_content">
+                    <input type="text" readonly>
+                    <span><input type="button" value="复制" id="copy_obtain_coordinate"></span>
+                </div>
+            </li>
+            <li class="screen_scale"><b></b></li>
+            <li class="draw_polygon"><b></b>
+                <div class="polygon_content">
+                    <ul>
+                        <li class="Circle"><b></b></li>
+                        <li class="Polygon"><b></b></li>
+                        <li class="Box"><b></b></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="route_Show">
+    <div class="route_Fleet_btn"></div>
+    <!--<div class="route_Ship_btn"></div>-->
+    <div class="route_Info_btn"></div>
+    <div class="route_Voyage_btn"></div>
+
+    <!--船队分类-->
+    <ul class="ShipType_list Fleet_List_ul">
+        <li id="0">Bulk Cargo<i></i></li>
+        <li id="1">Crude<i></i></li>
+        <li id="2">Container<i></i></li>
+    </ul>
+    <ul class="FleetName_List Fleet_List_ul"></ul>
+
+    <!--航线分类-->
+    <ul class="routeType_list route_List_ul">
+        <li type="0">BCI<i></i></li>
+        <li type ="1">BDTI<i></i></li>
+        <li type ="2">BCTI<i></i></li>
+        <li type ="3">BITR<i></i></li>
+        <li type ="4">BLPGR<i></i></li>
+        <li type ="5">BPI<i></i></li>
+        <li type ="6">BSI<i></i></li>
+        <li type ="7">BHSI<i></i></li>
+    </ul>
+    <ul class="oneRoute_List route_List_ul"></ul>
+
+</div>
+
+
+<div id="route_list">
+    <div class="route_title">
+        <span>船舶列表</span>
+        <div class="route_title_offbtn"></div>
+        <div class="route_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="ship_list">
+        <input type="text">
+        <ul class="ship_list_title">
+            <li>
+                <span>船名</span>
+                <span>MMSI</span>
+            </li>
+        </ul>
+        <ul class="ship_list_content">
+        </ul>
+    </div>
+    <div class="oneShip_listShow_btn"></div>
+    <div class="oneShip_route_listDiv">
+        <ul class="oneShip_routeList_title">
+            <li>
+                <span>序号</span>
+                <span>出发时间</span>
+                <span>到达时间</span>
+                <span>出发港口</span>
+                <span>到达港口</span>
+            </li>
+        </ul>
+        <ul class="oneShip_routeList">
+        </ul>
+    </div>
+</div>
+
+<!--
+    船队管理
+-->
+<!--船队信息管理-->
+<div id="fleet">
+    <div class="fleet_title">
+        <span>VLOC</span>
+        <div class="title_offbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="fleetInfo_timeSelect">
+        <div class="today_btn">今日</div>
+        <div class="time_Line">
+            <div class="timeLine_LeftBtn"></div>
+            <div class="timeLine_List">
+                <div class="timeLine_Axle"></div>
+                <ul class="TimePointList">
+                    <!--<li><span>20171</span><i></i></li>-->
+                    <!--<li><span>20172</span><i></i></li>-->
+                    <!--<li><span>20173</span><i></i></li>-->
+                    <!--<li><span>20174</span><i></i></li>-->
+                    <!--<li><span>20175</span><i></i></li>-->
+                    <!--<li><span>20176</span><i></i></li>-->
+                    <!--<li><span>20178</span><i></i></li>-->
+                    <!--<li><span>20179</span><i></i></li>-->
+                    <!--<li><span>201710</span><i></i></li>-->
+                    <!--<li><span>201711</span><i></i></li>-->
+                    <!--<li><span>201712</span><i></i></li>-->
+                </ul>
+            </div>
+            <div class="timeLine_RightBtn"></div>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="fleetInfo_content">
+        <ul class="fleetList_title">
+            <li>
+                <span>船舶类型</span><span>IMO</span><span>MMSI</span><span>船名</span><span>DWT(t)</span><span>船龄</span><span>状态</span>
+            </li>
+        </ul>
+        <!--<div class="loading"></div>-->
+        <ul class="fleetList_List">
+            <li><span>AAAAAAAAAA</span><span>1234567</span><span>0000000000</span><span>AAAAAAAAAAAA</span><span>1111111</span><span>22</span><span>Equasis不更新</span><span><i class= "shipDetailInfo" ></i></span><span><i class="checked"></i></span><span><i class="checked"></i></span></li>
+        </ul>
+
+    </div>
+    <!--<div class="dividing_line"></div>-->
+    <div class="fleetInfo_total">
+        <div class="fleetInfo_Num">
+            <span>总船舶数量：</span>
+            <span>0</span>
+            <span class="fleet_TotalBtn fleet_AddBtn fleet_AddNumBtn"></span>
+            <span class="fleet_TotalBtn fleet_LessBtn fleet_LessNumBtn"></span>
+        </div>
+        <div class="fleetInfo_DWT">
+            <span>总DWT：</span>
+            <span>0</span>
+            <span class="fleet_TotalBtn fleet_AddBtn fleet_AddDWTBtn"></span>
+            <span class="fleet_TotalBtn fleet_LessBtn fleet_LessDWTBtn"></span>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="ShipSearch">
+        <div class="Search_Info">
+            <div class="search_type">
+                类型: <input type="text" type="0" class="Search_typeText Search_Text">
+                <ul class="Search_typeSelect Search_Select">
+                    <li type="0">散货</li>
+                    <li type="1">原油</li>
+                    <li type="2">集装箱</li>
+                </ul>
+            </div>
+            <div class="search_status">
+                状态: <input type="text" type="0" class="Search_statusText Search_Text" readonly>
+                <!--状态: <span type="1" class="hhhh">服役中</span>-->
+                <ul class="Search_statusSelect Search_Select">
+                    <li type="-1">All</li>
+                    <li type="0">在建中</li>
+                    <li type="1">服役中</li>
+                    <li type="2">维修中</li>
+                    <li type="3">停航</li>
+                    <li type="4">已拆解</li>
+                    <li type="8">改建中</li>
+                    <li type="9">暂停服务</li>
+                    <li type="A">即将拆解</li>
+                    <li type="B">已下水</li>
+                </ul>
+            </div>
+            <div class="DWT_range">
+                DWT: <input type="text" placeholder="0" class="min_dwt">  至  <input type="text" placeholder="9999999" class="max_dwt">
+            </div>
+            <div class="DWTSearch_btn"></div>
+        </div>
+    </div>
+    <div class="fleetInfo_content Search_fleetInfo_content">
+        <ul class="fleetList_title">
+            <li>
+                <span>船舶类型</span><span>IMO</span><span>MMSI</span><span>船名</span><span>DWT(t)</span><span>船龄</span><span>状态</span>
+            </li>
+        </ul>
+        <ul class="search_ship_List">
+            <!--<li><span>AAAAAAAAAA</span><span>1234567</span><span>0000000000</span><span>AAAAAAAAAAAA</span><span>1111111</span><span>22</span><span>正服役</span><span><i class= "shipDetailInfo" ></i></span><span><i class="add"></i></span></li>-->
+        </ul>
+    </div>
+    <div class="searchInfo_total">
+        <div class="fleetInfo_Num">
+            <span>船舶数量：</span>
+            <span>0</span>
+        </div>
+    </div>
+</div>
+<!--船舶详情-->
+<div id="shipDetails">
+    <div class="fleet_title">
+        <span class="shipName">SINOCARRIER</span>
+        <div class="title_offbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="shipInfo_show">
+        <div class="shipInfo_img">
+            <div class="shipInfo_imgShow">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </div>
+            <div class="shipInfo_imgBtn">
+                <span class="imgBtn_left"></span>
+                <span class="imgBtn_right"></span>
+            </div>
+        </div>
+        <ul class="shipInfo_List">
+            <li>船名: CHINA STEEL SUSTAINABILITY</li>
+            <li>IMO: 9012252</li>
+            <li>船级社: KR</li>
+            <li>MMSI: 441916000</li>
+            <li>船旗: <img src=""> KOR</li>
+            <li>建造年代: 1992-08-27</li>
+            <li>吃水: 10.4r19 m</li>
+            <li>状态: 正服役</li>
+            <li>DWT: 266307 mt</li>
+            <li>类型: Liquefied Gas Carrier (LPG)</li>
+            <li>船籍港: Bander Seri Begawa</li>
+            <li>长*宽*高: 172*26*14 m</li>
+            <li>source:AAAAAAAAAAAAAA</li>
+            <li>更新时间:2007-02-03</li>
+        </ul>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="shipInfo_company">
+        <ul>
+            <li>船东: </li>
+            <li>建造商: </li>
+            <li>ISM管理: </li>
+            <li>管理公司: </li>
+        </ul>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="shipInfo_fleet">
+        <ul>
+            <li><span>船队: </span><input type="text" id="shipInfo_FleetName" readonly>
+                <ul class="shipInfo_FleetList">
+                    <li FleetNumber=""></li>
+                    <li FleetNumber="F1">Capesize</li>
+                    <li FleetNumber="F2">VLOC</li>
+                    <li FleetNumber="F3">Panamax</li>
+                    <li FleetNumber="F4">Mini Cape</li>
+                    <li FleetNumber="F5">Supramax</li>
+                    <li FleetNumber="F6">Handysize</li>
+                    <li FleetNumber="F7">Handymax</li>
+                    <li FleetNumber="F8">VLCC</li>
+                    <li FleetNumber="F9">Aframax</li>
+                    <li FleetNumber="F10">MR Tanker</li>
+                    <li FleetNumber="F11">成品油</li>
+                    <li FleetNumber="F12">BLPGR</li>
+                    <li FleetNumber="F13">Q-Max</li>
+                </ul>
+            </li>
+            <li class="shipInfo_Time"><span>进入时间: </span><input id="shipInfo_EnterTime" size="12"/></li>
+            <li class="shipInfo_Time"><span>离开时间: </span><input id="shipInfo_LeaveTime" size="12"/></li>
+            <li><div>备注:</div><textarea class = "remarks"></textarea></li>
+
+        </ul>
+        <div class="shipInfo_updateBtn">保存</div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="shipInfo_btn">
+        <div class="ship_track"></div>
+    </div>
+</div>
+<!--船舶范围搜索-->
+<div id="ShipSearch_DWTRange">
+    <!--<span>船舶搜索</span>-->
+    <div class="Search_Info">
+        <div class="search_type">
+        类型: <input type="text" type="0" class="Search_typeText">
+        <ul class="Search_typeSelect">
+            <li type="0">散货</li>
+            <li type="1">原油</li>
+            <li type="2">集装箱</li>
+            <li type="3">AAAAAAAAAAAAAAAAAAAA</li>
+            <li type="4">AAAAAAAAAAAAAAA</li>
+        </ul>
+        </div>
+        <div class="DWT_range">
+        &nbsp;DWT: <input type="text" placeholder="0" class="min_dwt"> &nbsp; 至 &nbsp; <input type="text" placeholder="9999999" class="max_dwt">
+        </div>
+        <div class="DWTSearch_btn"></div>
+        <!--<div class="ShipSearch_ShowBtn"></div>-->
+    </div>
+    <div class="ShipSearch_ShowBtn"></div>
+</div>
+<!--船舶搜索结果-->
+<div id="searchShipList">
+    <!--<div class="fleet_title">-->
+        <!--<span>船舶列表</span>-->
+        <!--<div class="title_offbtn"></div>-->
+    <!--</div>-->
+    <!--<div class="dividing_line"></div>-->
+    <div class="fleetInfo_content">
+        <ul class="fleetList_title">
+            <li>
+                <span>船舶类型</span><span>IMO</span><span>MMSI</span><span>船名</span><span>DWT(t)</span><span>船龄</span><span>状态</span><span>船队</span>
+            </li>
+        </ul>
+        <ul class="fleetList_List">
+        </ul>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="fleetInfo_total">
+        <div class="fleetInfo_Num">
+            <span>船舶数量：</span>
+            <span>0</span>
+        </div>
+        <div class="searchInfo_operating">
+            <!--<i class="operating_radioBtn"></i>-->
+            <input type="checkbox" class = "check" checked="">
+            <span>显示已在船队船舶</span>
+        </div>
+    </div>
+</div>
+
+
+<!--
+    航线管理
+-->
+<!--整租航线-->
+<div id="routeInfo">
+    <div class="fleet_title">
+        <span>BCI -> Route C2</span>
+        <!--<div class="title_offbtn"></div>-->
+    </div>
+    <div class="dividing_line"></div>
+    <!--起终港口设置-->
+    <div class="routeStartEnd">
+        <div class="routePort_Select">
+            <div class="routePort_Start">
+                <!--标准出发港:<span class="routePoint_infoShow"></span>-->
+                标准出发港:<input type="text" class="routePoint_infoShow">
+                <i></i>
+            </div>
+            <div class="routePort_End">
+                <!--标准目的港:<span class="routePoint_infoShow"></span>-->
+                标准目的港:<input type="text" class="routePoint_infoShow">
+                <i></i>
+            </div>
+        </div>
+        <div class="routeStartEndPort routeStartPort_Select">
+            <span>出发港：</span>
+            <span>
+                <ul class="StartEndPort_List">
+                    <li><span>sadasdqw</span><i></i></li>
+                    <li><span>sadasdqw</span><i></i></li>
+                </ul>
+            </span>
+        </div>
+        <div class="routeStartEndPort routeEndPort_Select">
+            <span>目的港：</span>
+            <span>
+                <ul class="StartEndPort_List">
+                    <li><span>sadasdqw</span><i class="close"></i></li>
+                    <li><span>sadasdqw</span><i></i></li>
+                </ul>
+            </span>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <!--航线信息设置-->
+    <div class="routeInfo_Install">
+        <ul class="routeInfo_List">
+            <li>吨位: <input type="text"></li>
+            <li>吃水: <input type="text"></li>
+            <li>最大船龄: <input type="text"></li>
+            <li>权重: <input type="text"></li>
+            <!--<li>LOA: <input type="text"></li>-->
+            <!--<li>BM: <input type="text"></li>-->
+            <!--<li>DM: <input type="text"></li>-->
+            <li>装港: </li>
+            <li>等待时长: <input type="text"></li>
+            <li>TPH: <input type="text"></li>
+            <li>DTPH: <input type="text" disabled></li>
+            <!--<li>SHInc: <input type="checkbox" checked=true></li>-->
+            <li>SHInc: <input type="checkbox" class="SHInc"></li>
+            <li>卸港: </li>
+            <li>等待时长: <input type="text"></li>
+            <li>TPH: <input type="text"></li>
+            <li>DTPH: <input type="text" disabled></li>
+            <li>SHInc: <input type="checkbox" class="SHInc"></li>
+        </ul>
+    </div>
+    <div class="dividing_line"></div>
+    <!--航线中英文说明设置-->
+    <div class="routeDes">
+        <div class="routeDes_Chinese">
+            中文说明:
+            <textarea></textarea>
+        </div>
+        <div class="routeDes_English">
+            英文说明:
+            <textarea></textarea>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <!--航线按钮操作-->
+    <div class="routeInstall_Btn">
+        <div class="routeInstall_SaveBtn">保存</div>
+        <div class="routeInstall_CancelBtn">取消</div>
+    </div>
+</div>
+<!--期租航线-->
+<div id="LeaseRouteInfo">
+    <div class="fleet_title">
+        <span>BCI -> Route C8 03</span>
+        <!--<div class="title_offbtn"></div>-->
+    </div>
+    <div class="dividing_line"></div>
+    <!--交还船范围设置-->
+    <div class="routeStartEnd">
+        <div class="routePort_Select">
+            <div class="routePort_Start">
+                <!--交船范围:<span class="routePoint_infoShow"></span>-->
+                交船范围:<input type="text" class="routePoint_infoShow">
+                <i></i>
+            </div>
+            <div class="routePort_End">
+                <!--还船范围:<span class="routePoint_infoShow"></span>-->
+                还船范围:<input type="text" class="routePoint_infoShow">
+                <i></i>
+            </div>
+        </div>
+        <div class="routeStartEndPort routeStartPort_Select">
+            <span>交船港：</span>
+            <span>
+                <ul class="StartEndPort_List">
+                </ul>
+            </span>
+        </div>
+        <div class="routeStartEndPort routeEndPort_Select">
+            <span>还船港：</span>
+            <span>
+                <ul class="StartEndPort_List">
+                </ul>
+            </span>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <!--航线信息设置-->
+    <div class="LeaseRouteInfo_Install">
+        <ul class="LeaseRouteInfo_List">
+            <!--<li class="route_CargoType">-->
+                <!--<span>货物：</span><span><input type="text" value="" disabled/><span>(0)</span></span>-->
+                <!--<ul></ul>-->
+            <!--</li>-->
+            <li><span>权重: </span> <input type="text"> %</li>
+            <li><span>佣金: </span> <input type="text"> %</li>
+            <li><span>租期: </span> <input type="text"> - <input type="text"></li>
+            <li><span>最大船龄: </span> <input type="text"></li>
+            <li><span>DWT: </span> <input type="text"></li>
+            <li><span>容积: </span> <input type="text"></li>
+            <li><span>LOA: </span> <input type="text"></li>
+            <li><span>BEAM: </span> <input type="text"></li>
+            <li><span>吃水: </span> <input type="text"></li>
+            <li><span>海上不耗柴油 </span> <input type="checkbox"></li>
+            <li><span>空驶航速: </span> <input type="text"></li>
+            <li><span>空驶油耗: </span> <input type="text"></li>
+            <li><span>满载航速: </span> <input type="text"></li>
+            <li><span>满载油耗: </span> <input type="text"></li>
+        </ul>
+    </div>
+    <div class="dividing_line"></div>
+    <!--期租航线中英文说明设置-->
+    <div class="LeaseRouteDes">
+        <div class="routeDes_Chinese">
+            <span>中文说明:</span>
+            <textarea></textarea>
+        </div>
+        <div class="routeDes_English">
+            <span>英文说明:</span>
+            <textarea></textarea>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <!--航线按钮操作-->
+    <div class="LeaseRouteInstall_Btn">
+        <div class="LeaseRouteInstall_SaveBtn">保存</div>
+        <div class="LeaseRouteInstall_CancelBtn">取消</div>
+    </div>
+</div>
+
+
+<!--
+    航次管理
+-->
+<!--航次列表-->
+<div id="voyageList">
+    <div class="fleet_title">
+        <span>航次列表</span>
+        <div class="title_offbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="voyageList_select">
+        <div><label><input name="voyageType" type="checkbox" value="" class="voyage_toCheck" checked/>未处理 </label></div>
+        <div><label><input name="voyageType" type="checkbox" value="" class="voyage_checked" />已处理 </label></div>
+        <div class ="fleet_select"><span>船队：</span>
+            <span FleetNumber="F2" class = "selected_fleet">VLOC</span>
+            <ul class="FleetList">
+                <li FleetNumber="F1">Capesize</li>
+                <li FleetNumber="F2">VLOC</li>
+                <li FleetNumber="F3">Panamax</li>
+                <li FleetNumber="F4">Mini Cape</li>
+                <li FleetNumber="F5">Supramax</li>
+                <li FleetNumber="F6">Handysize</li>
+                <li FleetNumber="F7">Handymax</li>
+                <li FleetNumber="F8">VLCC</li>
+                <li FleetNumber="F9">Aframax</li>
+                <li FleetNumber="F10">MR Tanker</li>
+                <li FleetNumber="F11">成品油</li>
+                <li FleetNumber="F12">BLPGR</li>
+                <li FleetNumber="F13">Q-Max</li>
+            </ul>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="voyageList_List">
+        <ul>
+            <li>
+                <span>船名</span><span>IMO</span><span>出发港</span><span>出发时间</span><span>到达港</span><span>到达时间</span>
+            </li>
+        </ul>
+        <ul class="voyageList_content">
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03 00:00:00</span><span>AAAAAAAAAAA</span><span>2007-03-02 00:00:00</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+            <li><span>AAAAAAAAAAA</span><span>1234567</span><span>AAAAAAAAAAA</span><span>2007-02-03</span><span>AAAAAAAAAAA</span><span>2007-03-02</span></li>
+        </ul>
+    </div>
+</div>
+<!--航次详情-->
+<div id="voyageDetails">
+    <div class="fleet_title">
+    <!--<div class="voyage_title">-->
+        <span>航次详情</span>
+        <span>(未确认)</span>
+        <div class="title_GoBackBtn"></div>
+        <div class="title_MinimizeBtn"><input type="botton" disabled title="最小化"></div>
+        <div class="title_offbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="shipVoyageList">
+        <div class="shipVoyageList_leftbtn"></div>
+        <div class="shipVoyageList_content">
+            <ul class="shipVoyageList_List">
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-04</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-03</span></li>
+                <li><div></div><span>2007-02-06</span></li>
+            </ul>
+        </div>
+        <div class="shipVoyageList_rightbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="oneVoyageInfo">
+        <ul>
+            <li>船名：<input type="text" value="GIOVANNI BATTISTA DE CARLINI" title="GIOVANNI BATTISTA DE CARLINI" disabled> </li>
+            <li>IMO：1234567</li>
+            <li><span>货物：</span>
+                <span class="cargo_type_list">
+                <select>
+                    <option value="1">铁矿石</option>
+                    <option value="2">原油</option>
+                    <option value="3">液化天然气</option>
+                    <option value="4">液化石油气</option>
+                </select>
+                </span><i class="toCheck"></i>
+
+                <!--<span class="cargo_type">铁矿石</span>-->
+                <!--<ul class="cargo_type_list">-->
+                    <!--&lt;!&ndash;<li>""</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>铁矿石</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>原油</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>液化天然气</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>液化石油气</li>&ndash;&gt;-->
+                <!--</ul>-->
+            </li>
+            <li>吨位：<input type="text" class="DWT" placeholder="400000"> t</li>
+            <li>出发港：<input type="text" value="Wilmington (N Carolina)" title="Wilmington (N Carolina)" disabled> <i class="toCheck"></i><span>2007-02-03 20:00</span></li>
+            <li>到达港：<input type="text" value="Wilmington (N Carolina)" title="Wilmington (N Carolina)" disabled> <i class="toCheck"></i><span>2007-02-03 20:00</span></li>
+            <li>航行时长：20d20h20m</li>
+            <li>航速：00.00kts</li>
+            <li>航程：0nm</li>
+            <li>停泊总时长：20d20h20m</li>
+            <li>加油时长：20d20h20m</li>
+            <li>补给时长：20d20h20m</li>
+            <li>修船时长：20d20h20m</li>
+            <li>未明时长：20d20h20m</li>
+            <li>装货时长：20d20h20m</li>
+            <li>装货等待时长：20d20h20m</li>
+            <li>卸货时长：20d20h20m</li>
+            <li>卸货等待时长：20d20h20m</li>
+        </ul>
+        <div class="oneVoyage_DockedInfo">
+            <ul>
+                <li><span>序号</span><span>起止时间</span><span>历时</span><span>港口</span><span>状态</span></li>
+            </ul>
+            <ul class="oneVoyage_DockedList">
+                <li><span>01</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港锚泊</option>
+                        <option value="2" selected="selected">卸港</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+                <li><span>02</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港</option>
+                        <option value="2" selected="selected">卸港锚泊</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+                <li><span>03</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港锚泊</option>
+                        <option value="2" selected="selected">卸港</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+                <li><span>04</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港</option>
+                        <option value="2" selected="selected">卸港锚泊</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+                <li><span>05</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港</option>
+                        <option value="2" selected="selected">卸港锚泊</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+                <li><span>06</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港</option>
+                        <option value="2" selected="selected">卸港锚泊</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+                <li><span>07</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港</option>
+                        <option value="2" selected="selected">卸港锚泊</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+                <li><span>08</span><span>2007-02-02 20:00 至 2007-03-03 20:00</span><span>30d20h20m</span><span>AAAAAAAAAAAA</span><span>
+                    <select>
+                        <option value="1">装港</option>
+                        <option value="2" selected="selected">卸港锚泊</option>
+                        <option value="3">航行</option>
+                        <option value="4">锚泊</option>
+                        <option value="5">补给</option>
+                        <option value="6">加油</option>
+                        <option value="7">修船</option>
+                        <option value="8">暂停</option>
+                        <option value="9">不明</option>
+                    </select>
+                </span><div class="oneVoyage_EndBtn">航次结束</div></li>
+            </ul>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="voyageDetails_btnList">
+        <div class="voyageDetails_btn voyageBtn_StandardRoute">标准航线</div>
+        <div class="voyageDetails_btn voyageBtn_StandardGoods">标准货物</div>
+        <div class="voyageDetails_btn voyageBtn_SaveOrConfirm">保存</div>
+    </div>
+</div>
+<!--航次——标准航线-->
+<div id="voyage_StandardRoute">
+    <div class="fleet_title">
+        <span>标准航线</span>
+        <div class="title_offbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="StandardRoute_Data">
+        <ul>
+            <li><span></span><span>装港</span><span>卸港</span><span>航程</span><span>货量</span><span>货物</span><span>装卸</span><span>SH</span><span>LoadWait</span><span>Diswait</span><span>Age</span><span>系数</span></li>
+            <li><span>123456</span><span>Loyang Offshore Base</span><span>Pulau Ayer Merbau</span><span>00000</span><span>200000</span><span>铁矿石</span><span><select>
+                <option value="">FIO</option>
+                <option value="">FIOST</option>
+                <option value="">FI</option>
+                <option value="">FO</option>
+            </select></span><span><select>
+                <option value="">SHInc</option>
+                <option value="">SHExc</option>
+            </select></span><span>00h00m</span><span>00h00m</span><span>20</span><span><input type="text" value="0.0"></span></li>
+            <li><span>BITR-Asia Route 12</span><span>Pulau Ayer Merbau</span><span>Pulau Ayer Merbau</span><span>00000</span><span>200000</span><span>铁矿石</span><span>FIO</span><span>SHInc</span><span>00h00m</span><span>00h00m</span><span>20</span><span>1.0</span></li>
+            <li><span>基差</span><span>不符合</span><span>不符合</span><span>+0000</span><span>+000000</span><span>不符合</span><span>不符合</span><span>不符合</span><span>+00h00m</span><span>+00h00m</span><span>+00</span><span></span></li>
+        </ul>
+    </div>
+    <div class="dividing_line StandardRoute_line"></div>
+    <div class="StandardRoute_SaveBtn">保存</div>
+    <div class="StandardRoute_CancelBtn">取消</div>
+</div>
+<!--航次——标准货物-->
+<div id="voyage_StandardGoods">
+    <div class="fleet_title">
+        <span>标准货物</span>
+        <div class="title_offbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="productTypeSelect">
+        <ul>
+            <li><span>国家：</span>
+                <select>
+                    <option value="">澳大利亚</option>
+                    <option value="">巴西</option>
+                    <option value="">印度</option>
+                </select>
+            </li>
+            <li><span>公司：</span>
+                <select>
+                    <option value="">力诺</option>
+                    <option value="">巴西</option>
+                    <option value="">印度</option>
+                </select>
+            </li>
+            <li><span>产品：</span>
+                <select>
+                    <option value="">皮尔巴拉混合矿(块)</option>
+                    <option value="">巴西</option>
+                    <option value="">印度</option>
+                </select>
+            </li>
+            <li><span>铁含量：</span>
+                <select>
+                    <option value="">65%</option>
+                    <option value="">巴西</option>
+                    <option value="">印度</option>
+                </select>
+            </li>
+        </ul>
+    </div>
+    <div class="StandardGoods_List">
+        <ul>
+            <li><span></span><span>FE</span><span>SiO2</span><span>Al2O</span><span>P</span><span>S</span><span>LOl</span><span>H2O</span><span>粒度</span><span>其他</span></li>
+            <li class="TopSelect_ProductInfo"><span>产品</span><span>00.00%</span><span>00.0000%</span><span>00.0000%</span><span>0.0000%</span><span>0.0000%</span><span>00.0000%</span><span>00.0000%</span><span>+00.00mm:00.00% -00.00mm:00.00% +00.00mm:00.00%</span><span><input type="text" value="品位较高、粒度好，烧结较好，但含碱金属，不宜多用" title="品位较高、粒度好，烧结较好，但含碱金属，不宜多用" disabled></span></li>
+        </ul>
+        <ul>
+            <li class="ComparedSelect_ProductInfo"><span><select>
+                    <option value="">大商所</option>
+                    <option value="">巴西</option>
+                    <option value="">印度</option>
+                </select></span><span>00.00%</span><span>00.0000%</span><span>00.0000%</span><span>0.0000%</span><span>0.0000%</span><span>00.0000%</span><span>00.0000%</span><span>+00.00mm:00.00% -00.00mm:00.00% +00.00mm:00.00%</span><span><input type="text" value="品位较高、粒度好，烧结较好，但含碱金属，不宜多用" title="品位较高、粒度好，烧结较好，但含碱金属，不宜多用" disabled></span></li>
+            <li class="ProductDifference"><span>差值</span><span>+00.00%</span><span>+00.0000%</span><span>+00.0000%</span><span>+0.0000%</span><span>+0.0000%</span><span>+00.0000%</span><span>+00.0000%</span><span>符合</span><span></span></li>
+            <div class="ProductDifference_ModulusCount">
+                <div><span>吨位:</span> <input type="text" value="000.00"> <span>%</span></div>
+                <div><span>价格:</span> <input type="text"> <span>%</span></div>
+                <div><span>总系数:</span> <span>000.00%</span></div>
+            </div>
+        </ul>
+    </div>
+    <div class="ProductDifference_addBtn"></div>
+    <div class="StandardGoods_SaveBtn">保存</div>
+    <div class="StandardGoods_CancelBtn">取消</div>
+</div>
+<!--航次——最小化窗口-->
+<div id="voyage_Minimize">
+    <div class="fleet_title">
+        <!--<div class="voyage_title">-->
+        <span>航次详情</span>
+        <div class="title_RestoreBtn"><input type="botton" disabled title="向上还原"></div>
+        <div class="title_offbtn"></div>
+    </div>
+</div>
+<!--
+    泊位统计分析
+-->
+<div id="berth_SA">
+    <div class="fleet_title">
+        <span>泊位统计分析</span>
+        <div class="title_offbtn"></div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="BerthSA_Type">
+        <div class="BerthSA_ShipType">
+            <select>
+                <option value="">aaaaaa</option>
+            </select>
+            <div class="BerthSA_ShipTypeList">
+                <span><input type="text" value="" disabled/><span>(0)</span></span>
+                <ul>
+                    <li><label><input type="checkbox">铁矿石</label></li>
+                    <li><label><input type="checkbox">原油</label></li>
+                    <li><label><input type="checkbox">煤炭</label></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="dividing_line"></div>
+    <div class="BerthSA_Statistics"></div>
+    <div class="dividing_line"></div>
+    <div class="BerthSA_DataList"></div>
+</div>
+
+
+
+<div id="portBasicInfo">
+    <div class="portInfo_title">
+        <span></span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="portInfo_content">
+        <div class="portInfo_list">
+            <div class="port_country">
+                <span></span>
+                <i class="port_logo"></i>
+            </div>
+            <div class="port_position">
+                <span></span>
+                <span style="margin-left:50px;"></span>
+            </div>
+            <div class="port_authority">
+                <span style="position:relative;top:-10px;">港务局：</span>
+                <span></span>
+            </div>
+            <div class="port_chart_number">
+                <span style="position:relative;top:-10px;">海图号：</span>
+                <span></span>
+            </div>
+        </div>
+        <div class="portInfo_bottom_img"></div>
+    </div>
+    <div class="portInfo_btn">
+        <div class="portInfo_berth_btn"><i></i></div>
+        <div class="anchorageInfo_anchorage_btn"><i></i></div>
+    </div>
+</div>
+<div id="berthInfoManage">
+    <div class="portInfo_title">
+        <span>泊位信息管理</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="portInfo_content">
+        <div class="berthInfo_topLeft">
+            <ul class="berthInfo_pierList_title">
+                <li>
+                    <span>序号</span>
+                    <span>码头</span>
+                    <span>经纬度</span>
+                    <!-- <span>操作</span> -->
+                </li>
+            </ul>
+
+            <ul class="berthInfo_pierList"></ul>
+        </div>
+        <!-- <i class="add_pier_logo_btn"></i> -->
+        <div class="berthInfo_topRight">
+            <div class="berthInfo_content">
+                <div>
+                    <span>港口：</span>
+                    <span>Dmpier</span>
+                </div>
+                <div>
+                    <span>码头：</span>
+                    <span>Parker Point</span>
+                </div>
+                <div>
+                    <span>经纬度：</span>
+                    <span>LAT 20°39'S,LONG 116°43'E</span>
+                </div>
+                <div>
+                    <span>货物：</span>
+                    <span>lron Ore</span>
+                </div>
+                <div>
+                    <span>泊位数量：</span>
+                    <span>3</span>
+                </div>
+                <div class="pier_operating">
+                    <span class="pier_analysis_btn"></span>
+                    <span class="pier_remarks_btn"></span>
+                    <span class="pier_modify_btn"></span>
+                </div>
+            </div>
+        </div>
+        <div class="berthInfo_list">
+            <ul class="berthInfo_title">
+                <li>
+                    <span>序号</span>
+                    <span>全长</span>
+                    <span>吃水</span>
+                    <span>空高</span>
+                    <span>型宽</span>
+                    <span>长度</span>
+                    <span>水深</span>
+                    <span>装载机数量</span>
+                    <span>装载率</span>
+                    <span>移动</span>
+                    <span>外延</span>
+                    <span>操作</span>
+                </li>
+                <!-- <i class="add_berth_logo_btn"></i> -->
+            </ul>
+            <ul class="berthInfo_ListContent"></ul>
+        </div>
+    </div>
+</div>
+<div id="pier_modify">
+    <div class="portInfo_title">
+        <span>码头信息修改</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="pier_Info_content">
+        <div><span>码头名：</span><input type="text" value="码头名"></div>
+        <div><span>所属港口：</span><input type="text" value="所属港口"></div>
+        <div><span>所属公司：</span><input type="text" value="所属公司"></div>
+        <div><span>泊位数量：</span><input type="text" value="泊位数量"></div>
+        <div><span>经度：</span><input type="text" value="经度"></div>
+        <div><span>纬度：</span><input type="text" value="纬度"></div>
+        <div><span>盐浓度：</span><input type="text" value="盐浓度"></div>
+        <div><span>位置：</span><input type="text" value="位置"></div>
+        <div><span>潮汐：</span><input type="text" value="潮汐"></div>
+        <div class="pierInfo_select pierInfo_type_div"><span>码头类型：</span><span class="pier_Info_Type"></span>
+            <ul class="pierInfo_select_list pier_Info_Type_list">
+                <li>装载1</li>
+                <li>卸载1</li>
+                <li>不明1</li>
+            </ul>
+        </div>
+        <div class="pierInfo_select pierInfo_goods_div"><span>货物：</span><span class="pier_Info_goods"></span>
+            <ul class="pierInfo_select_list pier_Info_goods_list">
+                <li>a</li>
+                <li>b</li>
+                <li>c</li>
+                <li>d</li>
+            </ul>
+        </div>
+        <div class="pierInfo_select pierInfo_InoutType_div"><span>进出口类型：</span><span class="pier_Info_InoutType"></span>
+            <ul class="pierInfo_select_list pier_Info_InoutType_list">
+                <li>装载</li>
+                <li>卸载</li>
+                <li>不明</li>
+            </ul>
+        </div>
+        <div class="pier_info_submit_btn">提交</div>
+        <div class="pier_info_cancel_btn">取消</div>
+    </div>
+</div>
+
+
+<div id="pier_remarks">
+    <div class="portInfo_title">
+        <span>码头概述</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="pier_Info_contents">
+        <textarea name="pierRemark" id="pierRemark"></textarea>
+        <div class="pier_remark_submit_btn">确定</div>
+    </div>
+</div>
+<div id="stillArea_show">
+    <div class="portInfo_title">
+        <span>详细信息</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="stillArea_contents"></div>
+    <!--<div class="stillArea_locationChange_btn">位置改变</div>-->
+    <div class="stillArea_btn_list">
+        <div class="stillArea_btn stillArea_statistics">统计分析</div>
+        <div class="stillArea_btn stillArea_addBerth">设为泊位</div>
+        <div class="stillArea_btn stillArea_addAnch">设为锚地</div>
+    </div>
+
+</div>
+
+<div id="berth_select">
+    <div class="portInfo_title">
+        <span>泊位详情</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="addBerth_pier_select">
+        <div class="berth_detail_left berth_detail">
+            <div class="port_select addBerth_select">
+                <span>所属港口：</span>
+                <span></span>
+                <ul class="addBerth_port_list">
+                </ul>
+            </div>
+            <div class="berth_select addBerth_select">
+                <span>所属码头：</span>
+                <span>暂无码头</span>
+                <ul class="addBerth_pier_list">
+                </ul>
+                <div class="inquire_Details inquire_pier_details"></div>
+                <div class="inquire_Details add_pier_btn"></div>
+            </div>
+            <div class="berth_detail_input"><span>装载率：</span><input type="text" value=""></div>
+            <div class="berth_detail_input"><span>装载机数量：</span><input type="text" value=""></div>
+            <div class="berth_detail_input"><span>移动(Travel)：</span><input type="text" value=""></div>
+            <div class="berth_detail_input"><span>外延(Outreach)：</span><input type="text" value=""></div>
+        </div>
+        <div class="berth_detail_right berth_detail">
+            <div class="berthAdd_inputNum"><span>全长(LOA)：</span><input type="text" value=""><span> M</span></div>
+            <div class="berthAdd_inputNum"><span>吃水(Draft)：</span><input type="text" value=""><span> M</span></div>
+            <div class="berthAdd_inputNum"><span>水深(Depth)：</span><input type="text" value=""><span> M</span></div>
+            <div class="berthAdd_inputNum"><span>长度(Length)：</span><input type="text" value=""><span> M</span></div>
+            <div class="berthAdd_inputNum"><span>空高(AirDraft)：</span><input type="text" value=""><span> M</span></div>
+            <div class="berthAdd_inputNum"><span>型宽(Moulded_Beam)：</span><input type="text" value=""><span> M</span></div>
+        </div>
+        <!--<div class="berthInfo_PopupBox_btn">保存</div>-->
+        <button class="berthInfo_PopupBox_btn" style="background:#ccc;" disabled="disabled" >保存</button>
+        <div class="popupBox_DividingLine"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="onePier_berthList">
+        <ul class="onePier_berthTitle">
+            <li>
+                <span>序号</span>
+                <span>全长</span>
+                <span>吃水</span>
+                <span>空高</span>
+                <span>型宽</span>
+                <span>长度</span>
+                <span>水深</span>
+                <span>装载机数量</span>
+                <span>装载率</span>
+                <span>移动</span>
+                <span>外延</span>
+            </li>
+        </ul>
+        <ul class="onePier_berthContent">
+        </ul>
+    </div>
+</div>
+
+<div id="pier_add">
+    <div class="portInfo_title">
+        <span>码头信息</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="pier_Info_content">
+        <div><span>码头名：</span><input type="text" value="未命名"></div>
+        <div><span>所属港口：</span><input type="text" value="" disabled></div>
+        <div class="pier_company"><span>所属公司：</span><input type="text" value="">
+            <!--<ul class="pier_Company_list">-->
+                <!--<li>1</li>-->
+                <!--<li>2</li>-->
+                <!--<li>3</li>-->
+            <!--</ul>-->
+        </div>
+        <div><span>泊位数量：</span><input type="text" value=""></div>
+        <div><span>经度：</span><input class="LatLong_input" type="text" value="" readonly="readonly" style="background:#fff;">
+            <div class="pier_LatLong_enter">
+                <input type="text" value="00" maxlength="2"> °
+                <input type="text" value="00" maxlength="2"> .
+                <input type="text" value="0000" maxlength="4"> '
+                <div class="EastLong_or_WestLong EastLong"></div>
+            </div>
+        </div>
+        <div><span>纬度：</span><input class="LatLong_input" type="text" value="" readonly="readonly" style="background:#fff;">
+            <div class="pier_LatLong_enter">
+                <input type="text" value="00" maxlength="2"> °
+                <input type="text" value="00" maxlength="2"> .
+                <input type="text" value="0000" maxlength="4"> '
+                <div class="SouthLat_or_NorthLat SouthLat"></div>
+            </div>
+        </div>
+        <div><span>盐浓度：</span><input type="text" value=""></div>
+        <div><span>位置：</span><input type="text" value=""></div>
+        <div><span>潮汐：</span><input type="text" value=""></div>
+        <div><span>码头类型：</span><input type="text" value=""></div>
+        <div><span>货物：</span><input type="text" value=""></div>
+        <div><span>进出口类型：</span><input type="text" value=""></div>
+        <!--<div class="pierInfo_select pierInfo_type_div"><span>码头类型：</span><span class="pier_Info_Type"></span>-->
+            <!--<ul class="pierInfo_select_list pier_Info_Type_list">-->
+                <!--<li>装载1</li>-->
+                <!--<li>卸载1</li>-->
+                <!--<li>不明1</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="pierInfo_select pierInfo_goods_div"><span>货物：</span><span class="pier_Info_goods"></span>-->
+            <!--<ul class="pierInfo_select_list pier_Info_goods_list">-->
+                <!--<li>a</li>-->
+                <!--<li>b</li>-->
+                <!--<li>c</li>-->
+                <!--<li>d</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="pierInfo_select pierInfo_InoutType_div"><span>进出口类型：</span><span class="pier_Info_InoutType"></span>-->
+            <!--<ul class="pierInfo_select_list pier_Info_InoutType_list">-->
+                <!--<li>装载</li>-->
+                <!--<li>卸载</li>-->
+                <!--<li>不明</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div><span>描述：</span><textarea name="" id="" ></textarea></div>
+        <div class="pier_info_add_submit_btn">提交</div>
+        <div class="pier_info_reset_btn">重置</div>
+    </div>
+</div>
+
+<div id="berth_add">
+    <div class="portInfo_title">
+        <span>添加泊位信息</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="berth_add_content">
+        <div><span>所属港口：</span><input type="text" value="" disabled></div>
+        <div><span>所属码头：</span><input type="text" value="" disabled></div>
+        <div class="berthAdd_inputNum"><span>全长(LOA)：</span><input type="text" value=""></div>
+        <div class="berthAdd_inputNum"><span>吃水(Draft)：</span><input type="text" value=""></div>
+        <div class="berthAdd_inputNum"><span>空高(AirDraft)：</span><input type="text" value=""></div>
+        <div class="berthAdd_inputNum"><span>型宽(Moulded_Beam)：</span><input type="text" value=""></div>
+        <div class="berthAdd_inputNum"><span>长度(Length)：</span><input type="text" value=""></div>
+        <div class="berthAdd_inputNum"><span>水深(Depth)：</span><input type="text" value=""></div>
+        <div><span>装载机数量：</span><input type="text" value=""></div>
+        <div><span>装载率：</span><input type="text" value=""></div>
+        <div><span>移动(Travel)：</span><input type="text" value=""></div>
+        <div><span>外延(Outreach)：</span><input type="text" value=""></div>
+        <div class="berth_add_submit">保存</div>
+        <div class="berth_add_reset">重置</div>
+    </div>
+</div>
+<div class="alert"></div>
+<div class="confirm"></div>
+
+<!--&lt;!&ndash;锚地详情页面&ndash;&gt;-->
+<div id="anch_select">
+    <div class="portInfo_title">
+        <span>锚地详情</span>
+        <div class="portInfo_title_offbtn"></div>
+        <div class="portInfo_bottom_img"><img src="/images/line_1.png"></div>
+    </div>
+    <div class="anchInfo_select_content">
+        <div class="addAnch_port_select">
+            <span>所属港口：</span>
+            <span>London</span>
+            <ul class="addAnch_port_list">
+                <li>London</li>
+                <li>Singapore</li>
+                <li>Abidjan</li>
+                <li>Algiers</li>
+                <li>Marseilles</li>
+            </ul>
+            <!--<div class="inquire_Details inquire_port_details">查</div>-->
+        </div>
+        <div class="anch_detail_input"><span>锚地名：</span> <input type="text"></div>
+        <div class="anch_detail_input"><span>用途：</span> <textarea name="" id="AnchUse"></textarea></div>
+        <div class="anch_detail_input"><span>说明：</span> <textarea name="" id="AnchDes"></textarea></div>
+    </div>
+    <!--<div class="addAnch_confirm addAnch_btn">保存</div>-->
+    <button class="addAnch_confirm addAnch_btn" style="background:#ccc;" disabled="disabled" >保存</button>
+    <div class="addAnch_reset addAnch_btn">重置</div>
+    <div class="popupBox_DividingLine"><img src="/images/line_1.png"></div>
+    <div class="onePort_AnchList">
+        <ul class="onePort_AnchTitle">
+            <li>
+                <span>序号</span>
+                <span>锚地名</span>
+                <span>用途</span>
+                <span>描述</span>
+            </li>
+        </ul>
+        <ul class="onePort_AnchContent">
+        </ul>
+    </div>
+</div>
+
+
+<!--泊位管理-->
+<div id="newBerth">
+    <div class="newBerthAnch_title">
+        <span>泊位管理</span>
+        <div class="dividing_line line_1"></div>
+    </div>
+    <div class="pierInfo_list" terminalKey="">
+        <div class="pier_info port_select span_select">
+            <span>港口：</span><span id="port_name" port_id=""></span>
+            <ul id="berth_port_list">
+            </ul>
+        </div>
+        <div class="pier_info pier_select input_select">
+            <span>码头名称：</span><input type="text" id="pier_name" placeholder="请输入码头名称">
+            <ul id ="pier_name_list">
+            </ul>
+        </div>
+        <div class="pier_info company_select input_select">
+            <span>公司：</span><input type="text" id="company_name" placeholder="请输入公司名">
+            <ul id ="company_name_list">
+            </ul>
+        </div>
+        <div class="pier_info pier_BerthNum">
+            <span>泊位：</span><input type="text" placeholder="0" id="berth_num"><span>个</span>
+        </div>
+        <div class="pier_info pier_impExpType span_select">
+            <span>进出口：</span><span id="import_export_type">进口</span>
+            <ul>
+                <li>进口</li>
+                <li>出口</li>
+            </ul>
+        </div>
+        <div class="pier_info pier_UseType span_select">
+            <!--<span>用途：</span><span value="01">装货</span>-->
+            <span>用途：</span><span id="use_type_key" value="01">装货</span>
+            <ul>
+                <li value="01">装货</li>
+                <li value="02">卸货</li>
+                <li value="03">加油</li>
+                <li value="04">补给</li>
+                <li value="05">修船</li>
+                <li value="06">不明</li>
+            </ul>
+        </div>
+        <div class="pier_info pier_CargoType">
+            <span>货物：</span><span><input id="cargo_type_key" value="" disabled/><span></span></span>
+            <ul>
+                <!--<li><label for="01"><input type="checkbox" id="01">铁矿石</label></li>-->
+                <!--<li><label for="02"><input type="checkbox" id="02">原油</label></li>-->
+                <!--<li><label for="03"><input type="checkbox" id="03">煤炭</label></li>-->
+            </ul>
+        </div>
+        <div class="pier_info pier_LongLat">
+            <span>经纬度：</span><input type="text" id="LON_LAT" numeric = "0,0" disabled value="00°00.0000N, 00°00.0000S">
+        </div>
+        <div class="pier_info pier_Location">
+            <span>位置：</span><input type="text" id="location">
+        </div>
+        <div class="pier_info pier_Des">
+            <span>说明：</span><input type="text" id ="des">
+        </div>
+    </div>
+    <div class="dividing_line line_1"></div>
+    <ul class="berth_list">
+    </ul>
+    <div class="dividing_line line_1"></div>
+    <div class="pier_btn">
+        <button id = "berth_statistic" class="berthAnch_btn">统计</button>
+        <button id ="berth_save" class="berthAnch_btn" style = "background:#ccc" disabled="disabled">保存</button>
+        <button id = "berth_cancel" class="berthAnch_btn">取消</button>
+    </div>
+</div>
+
+<div id="newAnch">
+    <div class="newBerthAnch_title">
+        <span>锚地管理</span>
+        <div class="dividing_line line_1"></div>
+    </div>
+    <div class="anchInfo_list">
+        <div class="pier_info anchName_select input_select">
+            <span>锚地名：</span><input type="text" id="anch_name" placeholder="请输入锚地名称" value="">
+            <ul id="anch_name_list">
+            </ul>
+        </div>
+        <div class="pier_info anch_purpose">
+            <span>用途：</span><input type="text" id="anch_purpose" placeholder="请输入锚地用途" value="">
+        </div>
+        <div class="pier_info anch_Des">
+            <span>说明：</span><input type="text" id="anch_Des" placeholder="请输入锚地说明" value="">
+        </div>
+    </div>
+    <div class="dividing_line line_1"></div>
+    <ul class="anch_AllLongLat">
+        <li>
+            <span>已选经纬度</span>
+            <ul class="oneAnch_longLat selected_LonLat">
+            </ul>
+        </li>
+    </ul>
+    <div class="dividing_line line_1"></div>
+    <div class="anchInfo_intentPort">
+        <div class="pier_info anch_IntentPort">
+            <span>目的港：</span>
+            <span>
+                <ul class="IntentPort_list">
+                    <li class = "add_port"><span> + 增加目的港口</span></li>
+                </ul>
+            </span>
+            <!--<div class="add_oneIntentPort_btn"></div>-->
+            <div class="AllIntentPort_List">
+                <input class="IntentPort_input" type="text" placeholder="请选择港口或输入港口">
+                <ul id="port_list_to_choose">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="dividing_line line_1"></div>
+    <div class="anch_btn">
+        <div id="anch_save" class="berthAnch_btn"  style = "background:#ccc" disabled="disabled">保存</div>
+        <div id="anch_cancel" class="berthAnch_btn">取消</div>
+    </div>
+</div>
+
+<!--泊位信息统计-->
+<div id="newBerthStatistics">
+    <div class="newBerthAnch_title">
+        <span>泊位信息统计</span>
+        <div class="close_btn"></div>
+        <div class="dividing_line line_1"></div>
+    </div>
+    <div class="pier_info span_select berthStat_shipType">
+        <span>船舶类型：</span><span>Ore Carrier</span>
+        <ul>
+            <li>Ore Carrier</li>
+        </ul>
+    </div>
+    <table id="BerthStatistics" width="90%" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>MOUTH</th>
+                <th>LOA(m)</th>
+                <th>BEAM(m)</th>
+                <th>DRAFT(m)</th>
+                <th>DWT(t)</th>
+                <th>DTPH(t/h)</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</body>
+<script type="text/javascript" src="/javascripts/map.js"></script>
+<script type="text/javascript" src="/javascripts/parkArea.js"></script>
+<script type="text/javascript" src="/javascripts/anchShow.js"></script>
+<script type="text/javascript" src="/javascripts/common.js"></script>
+<script type="text/javascript" src="/javascripts/portShow.js"></script>
+<script type="text/javascript" src="/javascripts/pointShow.js"></script>
+<script type="text/javascript" src="/javascripts/statistic.js"></script>
+<script type="text/javascript" src="/javascripts/voyage.js"></script>
+<script type="text/javascript" src="/javascripts/confirm.js"></script>
+<script type="text/javascript" src="/javascripts/fleet.js"></script>
+<script type="text/javascript" src="/javascripts/util.js"></script>
+<script type="text/javascript" src="/javascripts/basicSkills.js"></script>
+<script type="text/javascript" src="/javascripts/portInfo.js"></script>
+<script type="text/javascript" src="/javascripts/manage.js"></script>
+<script type="text/javascript" src="/javascripts/jsapi.js"></script>
+<script type="text/javascript" src="/javascripts/corechart.js"></script>      
+<script type="text/javascript" src="/javascripts/jquery.gvChart-1.0.1.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.ba-resize.min.js"></script>
+<script type="text/javascript" src="/javascripts/berthInfo.js"></script>
+<script type="text/javascript" src="/javascripts/berth.js"></script>
+<script type="text/javascript" src="/javascripts/anch.js"></script>
+<script type="text/javascript" src="/javascripts/route.js"></script>
+<script type="text/javascript" src="/javascripts/voyageManagement.js"></script>
+<!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+<script src="/javascripts/datePicker/moment.min.js"></script>
+<script src="/javascripts/datePicker/moment.zh-cn.js"></script>
+<script src="/javascripts/datePicker/ion.calendar.min.js"></script>
+<script>
+    $(function(){
+        $('#shipInfo_EnterTime').each(function(){
+            changeSaveStatus(true);
+            $(this).ionDatePicker({
+                lang: 'zh-cn',
+                format: 'YYYY-MM-DD'
+            });
+        });
+        $('#shipInfo_LeaveTime').each(function(){
+            changeSaveStatus(true);
+            $(this).ionDatePicker({
+                lang: 'zh-cn',
+                format: 'YYYY-MM-DD'
+            });
+        });
+    });
+//    $('#shipInfo_EnterTime').val('2015-01-01');
+</script>
+
+<script type="text/javascript">
+</script>
+</html>

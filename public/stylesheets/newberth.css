@@ -1,0 +1,158 @@
+#newBerth,#newAnch,#newBerthStatistics,#berth_SA{background:#fff;position:fixed;z-index:100;display:none; border-radius: 10px;}
+#newBerth{width:640px;height:450px;top:50px;left:200px;display:none;background: rgba(6, 2, 5, 0.8)} /*设置了透明度*/
+#newAnch{width:500px;height:452px;top:50px;left:300px;display:none;background: rgba(6, 2, 5, 0.8)}
+#newBerthStatistics{width:600px;height:400px;top:50px;left:300px;display:none;background: rgba(6, 2, 5, 0.8)}
+.newBerthAnch_title{width:100%;height:30px;}
+.newBerthAnch_title>span{display:block;width:100%;text-align:center;height:28px;line-height:28px;margin:0 auto;color:whitesmoke}
+.dividing_line{width:96%;height:2px;background:url("/images/line_1.png") no-repeat;margin:0 auto;position:relative;}
+/*输入框样式*/
+.pierInfo_list,.anchInfo_list,.anchInfo_intentPort{width:94%;margin:0 auto;}
+.pier_info{display: inline-block;height:32px;position:relative;margin-right:5px;margin-top:5px;}
+.pier_info>span{display:inline-block;height:24px;line-height:24px;font-size:14px;color:white}
+.pier_info>span:nth-child(2){padding-left:5px;height:22px;line-height:22px;border:1px solid #989898;font-size:12px;cursor:pointer;border-radius:5px;white-space:nowrap;text-overflow:ellipsis;}
+
+.span_select>span:nth-child(2){color:black;background: white;font-weight: 500}
+.pier_CargoType>span:nth-child(2){background:white;}
+.pier_CargoType>span:nth-child(2)>input{width:95px;height:20px;line-height:20px;background:#fff;border:transparent;font-size:12px;cursor:pointer;color:black;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pier_CargoType>span:nth-child(2)>span{display:inline-block;position:absolute;height:20px;line-height:20px;color:#323232;font-size:12px;right:8px;}
+.pier_info>input{display:inline-block;width:120px;padding-left:5px;height:22px;line-height:22px;font-size:12px;border:1px solid #989898;border-radius:5px;position:relative;top:-1px;font-weight: 500}
+.pier_info>ul{width:124px;position:absolute;z-index:1000;cursor:pointer;top:24px;left:43px;background:#fff;border-radius:5px;overflow:hidden;overflow-y:scroll;display:none;}
+/*.pier_info>ul{width:124px;max-height:100px;position:absolute;z-index:1000;cursor:pointer;top:24px;left:43px;background:#fff;border-radius:5px;overflow:hidden;overflow-y:scroll;display:none;}*/
+.pier_info>ul>li{width:96%;height:20px;font-size:12px;padding-left:5px;}
+/*.pier_info>ul>li{width:96%;height:20px;font-size:12px;padding-left:5px;font-weight: 300;}*/
+
+.pier_info>ul>li:hover{background:#2EB1EA;color:#fff;}
+.pier_impExpType>ul{left:58px;width:44px;overflow-y:hidden;}
+.pier_UseType>ul{left:43px;width:45px;overflow-y:hidden;}
+.pier_CargoType>ul{left:44px;width:123px;overflow-y:hidden;}
+/*全局输入框获取焦点样式*/
+input:focus{border:1px solid transparent;box-shadow:0px 0px 2px 2px #2EB1EA;}
+
+/*码头信息输入样式*/
+.pier_BerthNum{margin-right:42px;}
+.pier_impExpType{margin-right:42px;}
+.pier_UseType{margin-right:42px;}
+.port_select>span:nth-child(2){width:160px;}
+.port_select>ul{width:164px;}
+.company_select>ul{width:260px;left:-91px;}
+.pier_select>ul{width:200px;left:-5px;}
+.company_select>ul>li,.pier_select>ul>li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pier_BerthNum>input{width:30px;}
+.pier_impExpType>span:nth-child(2){width:40px;}
+.pier_UseType>span:nth-child(2){width:40px;}
+.pier_CargoType>span:nth-child(2){width:120px;}
+.pier_CargoType>ul>li label{display:inline-block;height:20px;cursor:pointer;width:100%;}
+
+.pier_CargoType>ul>li input{position:relative;top:3px;}
+.pier_LongLat>input{width:170px;margin-right: 46px;}
+.pier_Location>input{width:256px;}
+.pier_Des>input{width:545px;}
+
+/*锚地信息输入样式*/
+.anchName_select>input{width:140px;}
+.anchName_select>ul{width:144px;left:57px;}
+.anch_purpose>input{width:200px;}
+.anch_Des{margin-left:14px;}
+.anch_Des>input{width:398px;}
+.anch_IntentPort{margin-left:15px;height:46px;position:relative;}
+.anch_IntentPort>span{height:46px;line-height:24px;overflow: hidden;}
+.anch_IntentPort>span:nth-child(2){width:355px;height:46px;cursor:auto;white-space:nowrap;overflow-x:scroll;}
+.IntentPort_list{width:5000px;}
+.AllIntentPort_List{width:361px;position:absolute;z-index:1000;max-height:140px;padding-top:30px;left:62px;top:48px;display:none;background:rgba(6, 2, 5, 0.8);;border-radius:5px;}
+.AllIntentPort_List>ul{width:361px;max-height:120px;margin-top:5px;display:block;overflow:hidden;overflow-y:scroll;}
+.AllIntentPort_List>ul>li{color: #c0c6c8;width:100%;height:20px;font-size:12px;padding-left:5px;font-weight: 500;cursor:pointer;}
+.AllIntentPort_List>ul>li:hover{background:#217BA2;color:#fff;}
+.AllIntentPort_List>.IntentPort_input{display:inline-block;width:333px;height:20px;line-height:20px;border-radius:3px;position:absolute;top:5px;left:10px;padding-left:5px;font-size:12px;border:1px solid #989898;font-weight:500;}
+
+
+.IntentPort_list>li{float:left;display:inline-block;height:20px;margin-top:4px;margin-left:5px;padding:0px 5px;border:1px solid #989898;border-radius:2px;background: rgba(255,255,255,0.2)}
+.add_port{float:left;display:inline-block;height:20px;line-height:20px;margin-top:4px;margin-left:5px;padding:0px 5px;border:1px solid #989898;border-radius:2px;background: rgba(255,255,255,0.2);cursor: pointer;font-weight: 600}
+.add_port:hover{float:left;display:inline-block;height:20px;margin-top:4px;margin-left:5px;  padding: 0px 5px;  border:1px solid #989898; background: rgba(157, 157, 157, 0.70);border-radius:2px;cursor: pointer;font-weight: 600}
+
+.IntentPort_list>li>span{display:inline-block;height:20px;line-height:20px;margin-right:6px;position:relative;top:-1px;}
+.IntentPort_list>li>i{display:inline-block;width:11px;height:11px;margin-top:4px;background:url("/images/cancel.png") no-repeat;cursor:pointer;}
+.IntentPort_list>li>i:hover{display:inline-block;width:11px;height:11px;margin-top:4px;background:url("/images/cancel-hover.png") no-repeat;cursor:pointer;}
+.add_oneIntentPort_btn{width:16px;height:16px;position: absolute;right:-20px;top:5px;cursor:pointer;background:url("/images/add_intentPort_nor.png") no-repeat;}
+.add_oneIntentPort_btn:hover{background:url("/images/add_intentPort_over.png") no-repeat;}
+.add_oneIntentPort_btn:active{background:url("/images/add_intentPort_down.png") no-repeat;}
+
+/*泊位列表*/
+.berth_list{width:91%;margin:10px auto;height:200px;background: rgba(6, 2, 5, 0);overflow:hidden;overflow-y:scroll; border-radius: 5px;}
+.berth_list>li{height:50px;width:100%;border-bottom:1px solid #00B7FF;}
+.berth_list>li[highLight="true"]{background:rgba(6, 95, 134, 0.5);}
+/*.berth_list>li[highLight="true"]{background:#217BA2;}*/
+.oneBerth_info>li{height:50px;float:left;}
+.oneBerth_info>li:first-child{width:40px;line-height:53px;text-align:center;}
+.oneBerth_info>li:nth-child(2){width:40px;}
+/*.oneBerth_info>li:nth-child(2)>span */
+/*.belong{display:block;width:20px;height:20px;margin:15px auto;background:#0f0;cursor:pointer;}*/
+.belong{display:block;width:24px;height:24px;margin:15px auto;background:url("/images/yes.png");cursor:pointer;}
+.notBelong{display:block;width:24px;height:24px;margin:15px auto;background:url("/images/no.png");cursor:pointer;}
+.oneBerth_info>li:nth-child(3){width:467px;}
+.oneBerth_list>li{height:24px;line-height:24px;font-size:12px;width:110px;float:left;margin-left: 6px;}
+.oneBerth_list>li>input{display:inline-block;width:27px;padding-left:5px;height:16px;line-height:16px;font-size:12px;border:1px solid #989898;border-radius:5px;}
+.oneBerth_list>li:last-child>input{width:40px;}
+.oneBerth_info>li{color:white}
+
+/*锚地经纬度列表*/
+
+.unselected_LonLat>li>span:nth-child(2){width:16px;height:16px;background:url("/images/anch-no.png") no-repeat;cursor:pointer;}
+.selected_LonLat>li>span:nth-child(2):not(.always_belong){width:16px;height:16px;background:url("/images/anch-yes.png") no-repeat;cursor:pointer;}
+.always_belong{width:16px;height:16px;background:url("/images/always-yes.png") no-repeat;cursor:pointer;}
+
+.anch_AllLongLat{width:89%;margin:10px auto;height:200px;border-top-left-radius:10px;border-top-right-radius:10px;overflow:hidden;}
+.anch_AllLongLat>li>span {display:inline-block;width:100%;height:20px;background:rgba(6, 2, 5, 0.5);color:#fff;line-height:20px;text-align:center;font-size:14px;}
+.oneAnch_longLat{width:100%;height:180px;overflow:hidden;overflow-y:scroll;}
+.oneAnch_longLat>li{width:100%;height:20px;color:white; cursor: pointer;}
+.oneAnch_longLat>li:hover{background:#217BA2;color:#fff;}
+.oneAnch_longLat>li>span{display:inline-block;height:16px;margin-left:40px;line-height:16px;padding:0px 10px;text-align:center;font-size:12px;overflow:hidden;}
+.oneAnch_longLat>li>span:first-child{width:24px;}
+.oneAnch_longLat>li>span:nth-child(2){width:16px;}
+.oneAnch_longLat>li>span:nth-child(3){width:220px;margin-left:0px;}
+
+
+/*泊位按钮*/
+.pier_btn{width:360px;height:40px;margin:10px auto;}
+.berthAnch_btn{display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;cursor:pointer;border-radius:5px;border:0px solid transparent;font-size:14px;color:#fff;background:#2EB1EA;outline:none;}
+.pier_btn>button{margin-right:85px;}
+.pier_btn>button:last-child{margin-right:0px;}
+
+/*锚地按钮*/
+.anch_btn{width:300px;height:40px;margin:16px auto;}
+.anch_btn>div{margin-right:160px;}
+.anch_btn>div:last-child{margin-right:0px;}
+
+
+/*泊位统计分析弹出框样式*/
+.newBerthAnch_title>.close_btn{width:12px;height:12px;position:absolute;right:15px;top:9px;cursor:pointer;background:url("/images/close_nor.png") no-repeat;}
+.newBerthAnch_title>.close_btn:hover{background:url("/images/close_over.png") no-repeat;}
+.newBerthAnch_title>.close_btn:active{background:url("/images/close_down.png") no-repeat;}
+.berthStat_shipType{margin-left:30px;margin-top:10px;}
+.berthStat_shipType>span:nth-child(2){width:100px;}
+.berthStat_shipType>ul{height:auto;width:106px;left:70px;overflow-y:hidden;}
+.berthStat_shipType>ul>li{width:100%;}
+#BerthStatistics{margin:0px auto;border-top-left-radius:10px;border-top-right-radius:10px;overflow:hidden;}
+#BerthStatistics tr{height:24px;width:100%;}
+#BerthStatistics th,#BerthStatistics td{color:#fff;font-size:13px;height:24px;line-height:24px;text-align:center;}
+#BerthStatistics th{background:rgba(6, 2, 5, 0.5);}
+
+
+
+/*
+    泊位统计分析
+*/
+#berth_SA{width:600px;height:400px;top:50px;left:300px;display:none;background: rgba(6, 2, 5, 0.8)}
+/*统计信息分类部分*/
+.BerthSA_Type{width:90%;height:24px;margin:3px auto;background:#ccc;}
+.BerthSA_Type>.BerthSA_ShipType{height:100%;width:270px;background:#666;}
+.BerthSA_Type>.BerthSA_ShipType>select{display:inline-block;width:80px;height:22px;line-height:22px;background:transparent;border:1px solid #fff;border-radius:5px;color:#fff;font-size:13px;}
+
+.BerthSA_ShipType>.BerthSA_ShipTypeList{display:inline-block;width:168px;position:relative;min-width:110px;height:22px;font-size:13px;color:#fff;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>span{display:inline-block;height:20px;line-height:20px;padding-left:5px;border:1px solid #ccc;position:relative;top:1px;background:transparent;color:#fff;border-radius:5px;width:160px;font-size:12px;cursor:pointer;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>span>input{width:138px;height:16px;line-height:16px;background:transparent;position:relative;top:-1px;border:transparent;font-size:12px;cursor:pointer;color:#fff;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>span>span{display:inline-block;position:absolute;height:18px;line-height:18px;color:#fff;font-size:12px;right:6px;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>ul{width:165px;max-height:100px;position:absolute;z-index:1000;cursor:pointer;top:22px;left:1px;background:#fff;border-radius:5px;overflow:hidden;display:none;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>ul>li{width:100%;height:20px;font-size:12px;color:#323232;padding-left:5px;font-weight: 300;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>ul>li:hover{background:#2EB1EA;color:#fff;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>ul>li label{display:inline-block;cursor:pointer;width:100%;}
+.BerthSA_ShipType>.BerthSA_ShipTypeList>ul>li input{position:relative;top:3px;margin-right:5px;}

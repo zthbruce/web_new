@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>地图</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/basicSkills.css' />
+    <link rel='stylesheet' href='/stylesheets/portInfo.css' />
+    <!--<link rel="stylesheet" href="http://openlayers.org/en/v3.17.1/css/ol.css" type="text/css">-->
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.1.1/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
+    <!--<script src="http://openlayers.org/en/v3.17.1/build/ol.js" type="text/javascript"></script>-->
+    <script type="text/javascript" src="/javascripts/blmMap.js"></script>
+    <script type="text/javascript" src="/javascripts/blmDraw.js"></script>
+    <script type="text/javascript" src="/javascripts/blmMarker.js"></script>
+    <script type="text/javascript" src="/javascripts/blmLayer.js"></script>
+    <script type="text/javascript" src="/javascripts/blmOperate.js"></script>
+    <script type="text/javascript" src="/javascripts/blmBind.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+  </head>
+  <body>
+  <map id="map" class="map"></map>
+  <div id="optain_topLeft_text"></div>
+  <div id="mouse_rightBottom_text"></div>
+  <div id="right_tool">
+    <div id="right_tool_btn"></div>
+    <div id="right_tool_content">
+      <ul class="basic_tool">
+        <li class="switch_map">地图
+          <div class="right_basic_map">
+            <div class="basic_map_type">
+              <div></div><div></div>
+            </div>
+            <div class="basic_map_list">
+              <div class="map_mouse_select" id="ditu">地图</div>
+              <div id="weitu">卫图</div>
+              <i></i>
+              <div id="haitu">海图</div>
+            </div>
+          </div>
+        </li>
+        <li class="obtain_coordinate">坐标
+            <div class="obtain_content">
+                <input type="text" readonly>
+                <span><input type="button" value="复制" id="copy_obtain_coordinate"></span>
+            </div>
+        </li>
+        <li class="screen_scale">标尺</li>
+        <li class="draw_polygon">画图
+            <div class="polygon_content">
+                <ul>
+                    <li class="Circle">圆</li>
+                    <li class="Polygon">多</li>
+                    <li class="Box">距</li>
+                </ul>
+            </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="portBasicInfo">
+    <div class="portInfo_title">
+      <span></span>
+      <div class="portInfo_title_offbtn"></div>
+      <div></div>
+    </div>
+    <div>adada</div>
+
+
+  </div>
+  </body>
+  <script type="text/javascript" src="/javascripts/common.js"></script>
+<script>
+
+    var source = new ol.source.Vector();
+    var vector = new ol.layer.Vector({
+        source: source,
+        style: new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: '#AE7528',       //测距完成后线颜色
+                width: 2                //测距完成后线宽度
+            })
+        })
+    });
+  var tiandi = blmol.layer.createTianDiTile('tiandi');
+  var map = blmol.map.createMap('map', [113.42, 14.44], 4,[tiandi,weixing,haitu,vector], false, false, false);
+//  var portLayer = blmol.layer.createVectorLayer('ports');
+//  var shipsLayer = blmol.layer.createVectorLayer('ships');
+//  var circleLayer = blmol.layer.createVectorLayer('circle');
+//  shipsLayer.setStyle(new ol.style.Style({
+//      stroke: new ol.style.Stroke({
+//          color: [0,255,0,0.9],
+//          width: 1
+//      }),
+//      image: new ol.style.Circle({
+//          radius: 1,
+//          stroke: new ol.style.Stroke({
+//              color: [0,255,0,0.9],
+//              width: 1
+//          })
+//      })
+//  }));
+//  portLayer.setStyle(new ol.style.Style({
+//      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+//          anchor: [0.5, 5],
+//          anchorXUnits: 'fraction',
+//          anchorYUnits: 'pixels',
+//          opacity: 0.95,
+//          src: '/icon/port.png'
+//      }))
+//  }));
+//  circleLayer.setStyle(new ol.style.Style({
+//      stroke: new ol.style.Stroke({
+//          width: 3,
+//          color: [255, 0, 0, 0]
+//      }),
+//      fill: new ol.style.Fill({
+//          color: [0, 0, 255, 0]
+//      })
+//  }));
+//
+//  map.addLayer(shipsLayer);
+//  map.addLayer(portLayer);
+//  map.addLayer(circleLayer);
+  //获取初始地图
+  setMapShow();
+
+
+
+  $('map').css('height',document.body.clientHeight + 'px');
+  //实时监测浏览器窗口高度
+  window.onresize = function(){
+      $(".map").css("height",$(window).height()+"px");
+      $("body").css("height",$(window).height()+"px");
+  }
+  $(".map").css("height",$(window).height()+"px");
+  $("body").css("height",$(window).height()+"px");
+
+
+  var currentMouseCoordinate;
+  //添加鼠标移动监听事件
+  blmol.bind.addOnMouseMoveListener(map,function(map,coordinate,feature,evt){
+      currentMouseCoordinate = coordinate;
+      $('#optain_topLeft_text').text(coordinate[0].toFixed(6)+','+coordinate[1].toFixed(6));
+  });
+//  console.log(blmol.operation.getZoom(map));
+
+</script>
+  <script type="text/javascript" src="/javascripts/basicSkills.js"></script>
+  <!--<script type="text/javascript" src="/javascripts/manage.js"></script>-->
+</html>

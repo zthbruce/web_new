@@ -1,0 +1,6 @@
+{
+	"appenders":[
+		{"type":"console"},
+		{"type":"file","filename":"./logs/rizhi.log","category":"blmlog"}
+	]
+}

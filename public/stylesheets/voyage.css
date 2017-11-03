@@ -1,0 +1,62 @@
+#route_Show{width:120px;height:40px;background:#fff;position:fixed;bottom:50px;left:50px;}
+#route_Show>div{display:inline-block;width:32px;height:32px;margin:4px;cursor:pointer;float:left;}
+#route_Show>.route_Ship_btn{background:url('/icon/route.png') no-repeat 4px 4px;}
+#route_Show>.route_Ship_btn:hover{background-position:-24px 4px;}
+#route_Show>.route_Ship_btn:active{background-position:-52px 4px;}
+#route_list{background:#fff;position:fixed;border-top-left-radius:10px;border-top-right-radius:10px;box-shadow:0px 5px 10px 5px #999;}
+#route_list{width:0px;height:0px;top:400px;left:50px;overflow:hidden;opacity:0;}
+
+.route_title{width:100%;height:32px;}
+.route_title>span{display:inline-block;height:30px;line-height:30px;padding-left:10px;color:#24A3D9;font-size:14px;}
+.route_title>.route_title_offbtn{width:12px;height:12px;background:url("/images/close_nor.png") no-repeat;float:right;margin-top:9px;margin-right:10px;cursor:pointer;}
+.route_title>.route_title_offbtn:hover{background:url("/images/close_over.png") no-repeat;}
+.route_title>.route_title_offbtn:active{background:url("/images/close_down.png") no-repeat;}
+.route_bottom_img{width:100%;height:2px;margin:0 auto;}
+.route_bottom_img>img{width:100%;height:100%;position:relative;top:-16px;}
+
+#route_list>.ship_list{width:270px;margin:20px 15px;float: left;}
+.ship_list>input{display:block;height:14px;line-height:14px;width:200px;margin:0px auto 20px;color:#323232;font-size:12px;padding:4px 0px 4px 8px;border-radius:10px;border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;outline:none;}
+.ship_list>input:focus{border:1px solid #00B7FF;box-shadow:0px 0px 2px 2px #00B7FF;}
+.ship_list>ul{width:100%;}
+.ship_list>ul>li{width:100%;height:16px;line-height:16px;font-size:12px;color:#323232;}
+.ship_list>ul>li>span{display:inline-block;width:130px;text-align:left;padding-left:10px;overflow:hidden;white-space:pre;text-overflow:ellipsis;}
+.ship_list>ul>li>span:last-child{width:90px;}
+.ship_list>.ship_list_title>li>span{width:130px;}
+.ship_list>.ship_list_title>li>span:last-child{width:110px;}
+.ship_list>.ship_list_title{background:#00B7FF;border-top-left-radius:10px;border-top-right-radius:10px;}
+.ship_list>.ship_list_title>li{font-size:14px;height:20px;line-height:20px;}
+.ship_list>.ship_list_content{height:270px;overflow-y:scroll;}
+.ship_list_content li{color:#060205;background:#ffffff;cursor:pointer;}
+.ship_list_content li:hover{color:#fff;background:#2EB1EA;}
+.ship_list_content .active{color:#fff;background:#2EB1EA;}
+
+.oneShip_listShow_btn {width:20px;height:30px;background:url('/images/expand.png') no-repeat;position:absolute;left:290px;top:200px;cursor:pointer;}
+/*.oneShip_listShow_btn_right{width:20px;height:30px;background:url('/images/expand_right.png') no-repeat;position:absolute;left:290px;top:200px;cursor:pointer;}*/
+/*.oneShip_listShow_btn_left{width:20px;height:30px;background:url('/images/expand_left.png') no-repeat;position:absolute;left:290px;top:200px;cursor:pointer;}*/
+/*.oneShip_listShow_btn{width:8px;height:30px;background:#00f;position:absolute;left:290px;top:200px;cursor:pointer;}*/
+.oneShip_route_listDiv{width:380px;position:absolute;left:300px;top:40px;}
+
+.oneShip_route_listDiv>ul{width:100%;}
+.oneShip_route_listDiv>ul>li{width:100%;height:16px;line-height:16px;font-size:12px;color:#323232;}
+.oneShip_route_listDiv>ul>li>span{display:inline-block;width:70px;text-align:center;}
+.oneShip_route_listDiv>ul>li>span:first-child{width:40px;}
+
+.oneShip_route_listDiv>.oneShip_routeList_title{background:#00B7FF;border-top-left-radius:10px;border-top-right-radius:10px;}
+.oneShip_route_listDiv>.oneShip_routeList_title>li{font-size:13px;height:20px;line-height:20px;}
+.oneShip_route_listDiv>.oneShip_routeList{height:330px;overflow-y:scroll;}
+.oneShip_route_listDiv>.oneShip_routeList>li{line-height:12px;height:28px;}
+.oneShip_route_listDiv>.oneShip_routeList>li>span{padding:2px 0px;line-height:12px;height:24px;overflow:hidden;}
+.oneShip_route_listDiv>.oneShip_routeList>li>span:first-child{line-height:24px;height:24px;}
+/*.oneShip_route_listDiv>.oneShip_routeList>li:hover{color:#fff;background:#2EB1EA;cursor:pointer;}*/
+.oneShip_routeList li{color:#060205;background:#ffffff;cursor:pointer;}
+.oneShip_routeList li:hover{color:#fff;background:#2EB1EA;}
+.oneShip_routeList .active{color:#fff;background:#2EB1EA;}
+
+
+
+
+
+
+
+
+

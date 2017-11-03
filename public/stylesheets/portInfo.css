@@ -1,0 +1,288 @@
+/*弹出框样式*/
+#portBasicInfo,#berthInfoManage,#pier_remarks,#stillArea_show,#pier_modify,#pier_add,#berth_select,#pier_detail,#berth_add,#anch_select, #anch_manage{background:#fff;position:fixed;border-top-left-radius:10px;border-top-right-radius:10px;box-shadow:0px 5px 10px 5px #999;}
+#portBasicInfo{width:360px;height:250px;top:300px;right:100px;display:none;}
+#berthInfoManage{width:860px;height:400px;top:100px;left:100px;display:none;}
+#pier_remarks{width:300px;height:300px;top:80px;left:400px;display:none;}
+
+#pier_modify{width:400px;height:540px;top:50px;right:50px;display:none;}
+
+
+#pier_detail{width:400px;height:510px;top:50px;right:50px;display:none;}
+
+/*弹出框标题样式*/
+.portInfo_title,.stillArea_title{width:100%;height:32px;}
+.portInfo_title>span,.stillArea_title>span{display:inline-block;height:30px;line-height:30px;padding-left:10px;color:#24A3D9;font-size:14px;}
+.portInfo_title>.portInfo_title_offbtn,.stillArea_title>.stillArea_title_offbtn{width:12px;height:12px;background:url("/images/close_nor.png") no-repeat;float:right;margin-top:9px;margin-right:10px;cursor:pointer;}
+.portInfo_title>.portInfo_title_offbtn:hover,.stillArea_title>.stillArea_title_offbtn:hover{background:url("/images/close_over.png") no-repeat;}
+.portInfo_title>.portInfo_title_offbtn:active,.stillArea_title>.stillArea_title_offbtn:active{background:url("/images/close_down.png") no-repeat;}
+.portInfo_bottom_img{width:100%;height:2px;margin:0 auto;}
+.portInfo_bottom_img>img{width:100%;height:100%;position:relative;top:-16px;}
+.portInfo_content{width:100%;height:152px;}
+.portInfo_list{width:82%;height:130px;padding:10px 0px;margin:0 auto;}
+.portInfo_list>div{width:100%;height:30px;line-height:30px;}
+.portInfo_list>div>span{display:inline-block;height:30px;line-height:30px;text-align:left;font-size:12px;}
+.portInfo_list>.port_country{height:40px;line-height:40px;}
+.portInfo_list>.port_country>i:first-child{display:inline-block;width:16px;height:12px;background:#000;margin-right:20px;position:relative;top:2px;}
+.portInfo_list>.port_country>.port_logo{display:inline-block;width:12px;height:16px;background:url('/images/port_logo.png') no-repeat;position:relative;margin-left:165px;}
+.port_authority>span:last-child,.port_chart_number>span:last-child{margin-left:20px;width:220px;overflow:hidden;white-space:pre;text-overflow:ellipsis;}
+.portInfo_btn{width:82%;height:66px;margin:0 auto;}
+.portInfo_btn>div{display:inline-block;width:90px;height:30px;margin-top:18px;background:#24A3D9;margin-left:20px;border-radius:5px;}
+.portInfo_btn>div>i{display:block;width:20px;height:20px;margin:5px auto;background:url('/images/berth.png') no-repeat;}
+.portInfo_btn>div:last-child{margin-left:66px;}
+.portInfo_btn>div:last-child>i{background:url('/images/anchorage.png') no-repeat;}
+.portInfo_btn>div:hover{background:#2EB1EA;}
+.portInfo_btn>div:active{background:#217BA2;}
+
+/*泊位管理弹出框样式*/
+/*.portInfo_content>.add_pier_logo_btn{display:block;width:16px;height:16px;cursor:pointer;position:absolute;top:34px;left:390px;background:#fff url("/images/add_nor.png") no-repeat;z-index:10000;}
+.portInfo_content>.add_pier_logo_btn:hover{background:url("/images/add_over.png") no-repeat;}
+.portInfo_content>.add_pier_logo_btn:active{background:url("/images/add_down.png") no-repeat;}*/
+.berthInfo_topLeft{display:inline-block;width:407px;margin-left:22px;height:100px;border-right:1px solid #999;border-bottom:1px solid #999;float:left;overflow-y:scroll;}
+/*.berthInfo_topLeft>.berthInfo_pierList_title{height:2px;}*/
+.berthInfo_topLeft li{height:20px;overflow:hidden;padding-left:6px;}
+.berthInfo_topLeft span{display:inline-block;height:20px;line-height:20px;font-size:12px;overflow:hidden;white-space:pre;text-overflow:ellipsis;text-align: center;}
+.berthInfo_topLeft span:first-child{width:30px;}
+.berthInfo_topLeft span:nth-child(2){width:140px;}
+.berthInfo_topLeft span:nth-child(3){width:130px;}
+/*.berthInfo_topLeft span:last-child{width:40px;}*/
+/*.berthInfo_topLeft span:last-child>i{display:inline-block;width:20px;height:20px;background:url("/images/delete_nor.png") no-repeat 3px 8px;}
+.berthInfo_topLeft span:last-child>i:hover{background:url("/images/delete_over.png") no-repeat 3px 8px;}
+.berthInfo_topLeft span:last-child>i:active{background:url("/images/delete_down.png") no-repeat 3px 8px;}*/
+.berthInfo_pierList>li:hover{background:#2EB1EA;color:#fff;cursor:pointer;}
+
+
+.berthInfo_topRight{display:inline-block;width:424px;height:100px;float:right;padding-left:5px;border-bottom:1px solid #999;border-left:1px solid #999;position:relative;}
+.berthInfo_content>div{height:20px;line-height: 20px;}
+.berthInfo_content span{height:20px;line-height:20px;font-size:13px;}
+.berthInfo_content>.pier_operating{width:90px;height:30px;position:absolute;bottom:-5px;right:-5px;}
+.pier_operating>span{display:inline-block;height:16px;width:16px;position:relative;top:0px;cursor:pointer;}
+.pier_operating>.pier_analysis_btn{background:url("/images/pieChart_nor.png") no-repeat;}
+.pier_operating>.pier_analysis_btn:hover{background:url("/images/pieChart_over.png") no-repeat;}
+.pier_operating>.pier_analysis_btn:active{background:url("/images/pieChart_down.png") no-repeat;}
+.pier_operating>.pier_remarks_btn{background:url('/images/remark.png') no-repeat;}
+.pier_operating>.pier_remarks_btn:hover{background:url('/images/remark.png') no-repeat -18px;}
+.pier_operating>.pier_remarks_btn:active{background:url('/images/remark.png') no-repeat -36px;}
+.pier_operating>.pier_modify_btn{background:url("/images/update_nor.png") no-repeat;}
+.pier_operating>.pier_modify_btn:hover{background:url("/images/update_over.png") no-repeat;}
+.pier_operating>.pier_modify_btn:active{background:url("/images/update_down.png") no-repeat;}
+
+.portInfo_content>.berthInfo_list{clear:both;background:#fff;width:860px;}
+.berthInfo_list li{font-size:13px;height:24px;overflow:hidden;padding-left:22px; }
+.berthInfo_list>.berthInfo_title{position: relative;}
+.berthInfo_title>.add_berth_logo_btn{display:block;width:16px;height:16px;cursor:pointer;position:absolute;right:8px;top:4px;background:#fff/*  url("/images/add_nor.png") no-repeat */;z-index:10000;}
+/*.berthInfo_title>.add_berth_logo_btn:hover{background:url("/images/add_over.png") no-repeat;}
+.berthInfo_title>.add_berth_logo_btn:active{background:url("/images/add_down.png") no-repeat;}*/
+.berthInfo_list span{display:inline-block;width:67px;height:24px;line-height:24px;text-align:center;overflow:hidden;}
+.berthInfo_list>ul>li>span:first-child{width:40px;}
+.berthInfo_ListContent{height:240px;overflow-y:scroll;}
+.berthInfo_ListContent>li:hover{background:#2EB1EA;color:#fff;}
+.berthInfo_ListContent>li span{position:relative;}
+.berthInfo_ListContent>li input{display:inline-block;width:90%;height:18px;position:absolute;top:1px;left:0px;color:#323232;font-size:13px;text-align:center;display:none;}
+.berthInfo_ListContent span:last-child>i{display:inline-block;width:20px;height:20px;position:relative;top:2px;}
+.berthInfo_ListContent .berth_delete_btn{background:url("/images/delete_nor.png") no-repeat 3px 8px;cursor:pointer;}
+.berthInfo_ListContent .berth_delete_btn:hover{background:url("/images/delete_over.png") no-repeat 3px 8px;}
+.berthInfo_ListContent .berth_delete_btn:active{background:url("/images/delete_down.png") no-repeat 3px 8px;}
+.berthInfo_ListContent .berth_modify_submit_btn{background:url('/images/save_nor.png') no-repeat;cursor:pointer;}
+/*.berthInfo_add_btn{width:20px;height:20px;background:url("/images/add_nor.png") no-repeat;position:absolute;right:36px;bottom:8px;cursor:pointer;}
+.berthInfo_add_btn:hover{background:url("/images/add_over.png") no-repeat;}
+.berthInfo_add_btn:active{background:url("/images/add_down.png") no-repeat;}*/
+
+/*码头信息修改弹出框样式*/
+#pier_add{width:800px;height:440px;top:50px;right:50px;display:none;}
+.pier_Info_content{width:88%;margin:10px auto;}
+.pier_Info_content>div{height:32px;width:100%;margin:5px 10px;position:relative;}
+/*.pier_Info_content>div>span:first-child{display:inline-block;width:90px;height:32px;line-height:32px;text-align:right;font-size:13px;}*/
+.pier_Info_content>div>span{display:inline-block;width:90px;height:32px;line-height:32px;text-align:right;font-size:13px;}
+.pier_Info_content>div>input{display:inline-block;height:20px;line-height:20px;width:200px;color:#323232;font-size:12px;padding:4px 0px 4px 8px;border-radius:5px;border:1px solid #989898;outline:none;}
+.pier_Info_content>div>input:focus{border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;}
+.pier_Info_content>.pierInfo_select>span{overflow:hidden;}
+.pier_Info_content>.pierInfo_select>span:nth-child(2){display:inline-block;height:20px;line-height:20px;width:200px;text-align:left;color:#323232;font-size:12px;padding:4px 0px 4px 8px;border-radius:5px;border:1px solid #989898;}
+.pier_Info_content .pierInfo_select_list,.pier_Info_content .pier_Company_list{max-height:100px;width:208px;position:absolute;z-index:10000000;left:90px;top:32px;background:#fff;border-radius:5px;border:1px solid #989898;display:none;}
+.pier_Info_content .pierInfo_select_list>li,.pier_Info_content .pier_Company_list>li{height:20px;line-height:20px;padding:0px 10px;font-size:12px;}
+.pier_Info_content .pierInfo_select_list>li:hover,.pier_Info_content .pier_Company_list>li:hover{background:#2EB1EA;color:#fff;}
+#pier_add>.pier_Info_content>div{width:45%;float:left;}
+#pier_add>.pier_Info_content>div:nth-child(3){position:relative;}
+#pier_add .pier_Company_list{max-height:160px;}
+
+#pier_add>.pier_Info_content>div:nth-child(13){width:100%;}
+#pier_add>.pier_Info_content>div:nth-child(13)>span{position:relative;top:-19px;}
+#pier_add>.pier_Info_content>div:nth-child(13)>textarea{width:545px;height:50px;resize: none;border-radius:5px;}
+#pier_add>.pier_Info_content>div:nth-child(13)>textarea:focus{border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;}
+#pier_modify>.pier_Info_content>.pier_info_submit_btn,#pier_modify>.pier_Info_content>.pier_info_cancel_btn{display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;background:#24A3D9;border-radius:5px;cursor:pointer;font-size:14px;color:#fff;margin-top:10px;margin-left:70px;}
+#pier_add>.pier_Info_content>.pier_info_add_submit_btn,#pier_add>.pier_Info_content>.pier_info_reset_btn{display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;background:#24A3D9;border-radius:5px;cursor:pointer;font-size:14px;color:#fff;margin-top:40px;margin-left:160px;}
+#pier_add>.pier_Info_content>.pier_info_add_submit_btn{margin-left:200px;}
+.pier_info_submit_btn:hover,.pier_info_cancel_btn:hover,.pier_info_add_submit_btn:hover,.pier_info_reset_btn:hover{background:#2EB1EA;}
+.pier_info_submit_btn:active,.pier_info_cancel_btn:active,.pier_info_add_submit_btn:active,.pier_info_reset_btn:active{background:#217BA2;}
+
+.pier_LatLong_enter{width:160px;height:26px;position:absolute;top:4px;left:99px;}
+.pier_LatLong_enter>input{width:16px;height:24px;outline:none;border:0px;}
+.pier_LatLong_enter>input:nth-child(3){width:28px;}
+.pier_LatLong_enter>div{display:inline-block;width:18px;height:18px;position:absolute;right:30px;top:4px;cursor:pointer;}
+/*东经*/
+.pier_LatLong_enter>.EastLong{background:url("/images/east_nor.png")  no-repeat;}
+.pier_LatLong_enter>.EastLong:hover{background:url("/images/east_over.png")  no-repeat;}
+.pier_LatLong_enter>.EastLong:active{background:url("/images/east_down.png")  no-repeat;}
+/*西经*/
+.pier_LatLong_enter>.WestLong{background:url("/images/west_nor.png")  no-repeat;}
+.pier_LatLong_enter>.WestLong:hover{background:url("/images/west_over.png")  no-repeat;}
+.pier_LatLong_enter>.WestLong:active{background:url("/images/west_down.png")  no-repeat;}
+/*南纬*/
+.pier_LatLong_enter>.SouthLat{background:url("/images/south_nor.png")  no-repeat;}
+.pier_LatLong_enter>.SouthLat:hover{background:url("/images/south_over.png")  no-repeat;}
+.pier_LatLong_enter>.SouthLat:active{background:url("/images/south_down.png")  no-repeat;}
+/*北纬*/
+.pier_LatLong_enter>.NorthLat{background:url("/images/north_nor.png")  no-repeat;}
+.pier_LatLong_enter>.NorthLat:hover{background:url("/images/north_over.png")  no-repeat;}
+.pier_LatLong_enter>.NorthLat:active{background:url("/images/north_down.png")  no-repeat;}
+
+
+/*码头备注修改弹出框样式*/
+#pier_remarks textarea{display:block;width:280px;height:220px;resize: none;margin:0 auto;color:#323232;}
+#pier_remarks .pier_remark_submit_btn{width:60px;height:30px;line-height:30px;text-align:center;margin:4px auto;background:#24A3D9;border-radius:5px;cursor:pointer;color:#fff;font-size:14px;}
+#pier_remarks .pier_remark_submit_btn:hover{background:#2EB1EA;}
+#pier_remarks .pier_remark_submit_btn:active{background:#217BA2;}
+
+/*静止区域信息显示弹出框样式*/
+#stillArea_show{width:400px;max-height:420px;min-height:160px;top:100px;right:100px;display:none;}
+.stillArea_contents{margin-top:10px;min-height: 60px;height:auto;margin-bottom: 20px;}
+.stillArea_contents>div{width:100%;height:26px;}
+.stillArea_contents>div>span{display:inline-block;height:26px;line-height:26px;width:45%;font-size:13px;text-align:right;}
+.stillArea_contents>div>span:last-child{width:55%;text-align:left;}
+.stillArea_btn{display:inline-block;width:100px;height:32px;line-height:32px;text-align:center;margin-left: 23px;cursor:pointer;font-size:14px;color:#fff;background:#24A3D9;margin-bottom: 20px;border-radius: 5px;}
+.stillArea_btn:hover{background:#2EB1EA;}
+.stillArea_btn:active{background:#217BA2;}
+.stillArea_contents>.stillArea_promptInfo{height:60px;line-height:60px;text-align:center;font-size:18px;color:#323232;}
+.stillArea_btn_list{width:100%;}
+/*添加泊位部分，泊位所属选择*/
+#berth_select{width:800px;height:400px;top:80px;left:100px;display:none;}
+.addBerth_pier_select{height:215px;width:94%;margin:0px auto;}
+.addBerth_select{height:34px;width:340px;position:relative;display:inline-block;}
+.berth_select{width:340px;}
+.addBerth_select>span{display:inline-block;height:24px;line-height:24px;width:70px;text-align:center;font-size: 14px;overflow:hidden;}
+.addBerth_select>span:nth-child(2){height:24px;line-height:24px;position:relative;left:-5px;padding-left:10px;width:170px;text-align:left;font-size:12px;border:1px solid #989898;border-radius: 5px;}
+.addBerth_select>ul{width:180px;max-height:100px;position:absolute;top:32px;right:15px;z-index:100000;background:#fff;border:1px solid #989898;border-radius:5px;display:none;overflow-y:auto;}
+.addBerth_select>ul>li{height:20px;line-height:20px;width:170px;padding-left:10px;font-size:12px;color:#323232;}
+.addBerth_select>ul>li:hover{background:#24A3D9;color:#fff;}
+.inquire_Details{width:28px;height:28px;line-height:28px;text-align:center;border-radius:5px;font-size:14px;background:#24A3D9;color:#fff;cursor:pointer;position:absolute;right:-55px;top:3px;z-index:1000000;}
+.inquire_pier_details{right:-20px;}
+.onePier_berthList{width:94%;margin:0px auto;position:relative;top:10px;clear:both;}
+.onePier_berthList>ul{width:100%;}
+.onePier_berthList>ul>li{width:100%;height:20px;font-size:12px;color:#fff;}
+.onePier_berthList>ul>li>span{display:inline-block;height:20px;line-height:20px;width:62px;text-align: center;overflow:hidden;white-space:pre;text-overflow: ellipsis;}
+.onePier_berthList>ul>li>span:nth-child(8){width:73px;}
+.onePier_berthList>.onePier_berthTitle{background:#24A3D9;border-top-left-radius:5px;border-top-right-radius:5px;}
+.onePier_berthList>.onePier_berthContent{overflow-y:scroll;height:115px;}
+.onePier_berthList>.onePier_berthContent>li{font-size:12px;color:#323232;}
+.box_berth .box_triangle{position:absolute;width: 0;height: 0;border-width:10px;border-color: transparent transparent #24a3d9 transparent;border-style:dashed dashed solid dashed;top:-20px;left:100px;}
+.box_berth{width:180px;height:160px;padding-top:10px; display:none;z-index:1000;color:#fff;top:10px;left:216px;opacity:1;font-size:5px;text-align:center;position:relative;background:#24a3d9;border-radius:5px;}
+.box_berth span{display:inline;width:90px;height:15px;line-height:15px;overflow:hidden;text-align:left;font-size:12px;color:#fff;}
+.box_berth_span{height:150px;width:200px;display:block;}
+.box_berth_span li{width:199px;height:15px;margin-top:5px;text-align: left;padding-left:10px;}
+
+.inquire_Details:hover{background-color:#2EB1EA;}
+.inquire_pier_details{background:#24A3D9 url("/images/update_down.png") no-repeat 6px 6px;}
+.add_pier_btn{background:#24A3D9 url("/images/add_down.png") no-repeat 6px 6px;}
+.inquire_Details:active{background-color:#217BA2;}
+.berthInfo_PopupBox_btn{width:60px;height:32px;line-height:32px;text-align:center;font-size:14px;cursor:pointer;background:#24A3D9;color:#fff;position:absolute;top:206px;right:26px;border:0px solid transparent;border-radius:5px;outline:none;}
+
+.berthInfo_PopupBox_btn:hover{background-color:#2EB1EA;}
+.berthInfo_PopupBox_btn:active{background-color:#217BA2;border:0px solid transparent;}
+.popupBox_DividingLine{width:100%;height:2px;position: relative;top:115px;}
+.popupBox_DividingLine>img{width:100%;height:100%;position:relative;top:-16px;}
+
+.berth_detail{width:50%;height:100px;position:relative;top:40px;float: left;}
+.berth_detail_left{width:55%;}
+.berth_detail_right{width:45%;}
+.berth_detail>div{height:24px;padding:5px;display:inline-block;float:left;position:relative;top:-35px;}
+.berth_detail>div>span{display:inline-block;width:148px;height:24px;line-height:24px;text-align:right;font-size:13px;}
+.berth_detail>.berthAdd_inputNum>span:last-child{margin-left:3px;width:12px;}
+.berth_detail>div>input{width:170px;height:24px;line-height:24px;padding-left:10px;color:#323232;font-size:12px;border-radius:5px;border:1px solid #989898;outline:none;}
+.berth_detail>div>input:focus{border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;}
+.berth_detail>.berthAdd_inputNum>input{width:65px;}
+
+
+
+
+
+
+
+/*码头详情悬浮框*/
+.pier_details_mousedown{width:160px;height:150px;position:absolute;background:#24A3D9;right:-30px;top:40px;z-index:10000;border-radius:5px;display: none;}
+.pier_details_mousedown>.pier_details_topArrow{width:0px;height:0px;border:10px solid transparent;border-bottom-color:#24A3D9;position:absolute;top:-19px;left:70px;}
+.pier_details_mousedown_list{width:90%;margin:10px auto;}
+.pier_details_mousedown_list>li{width:100%;height:18px;overflow: hidden;}
+.pier_details_mousedown_list>li>span{display:inline-block;height:18px;line-height:18px;overflow:hidden;text-align:right;font-size:12px;color:#fff;}
+.pier_details_mousedown_list>li>span:first-child{width:60px;}
+.pier_details_mousedown_list>li>span:last-child{width:82px;text-align:left;white-space:pre;text-overflow:ellipsis;}
+/*添加泊位弹出框*/
+#berth_add{width:460px;height:520px;top:50px;right:50px;display:none;}
+#berth_add .berth_add_content{width:90%;margin:0 auto;}
+.berth_add_content>div{width:90%;height:24px;margin:10px 0px;}
+/*.berth_add_content>div>span{display:inline-block;height:24px;line-height:24px;width:45%;text-align-last:justify;font-size:13px;}*/
+.berth_add_content>div>span{display:inline-block;height:24px;line-height:24px;width:51%;text-align:right;font-size:13px;}
+.berth_add_content>div>input{width:45%;height:24px;line-height:24px;padding-left:10px;color:#323232;font-size:12px;border-radius:5px;border:1px solid #989898;outline:none;}
+.berth_add_content>div>input:focus{border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;}
+.berth_add_content>.berth_add_submit,.berth_add_content>.berth_add_reset{display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;background:#24A3D9;border-radius:5px;cursor:pointer;font-size:14px;color:#fff;margin-top:20px;margin-left:60px;}
+.berth_add_content>.berth_add_submit{margin-left:0px;}
+.berth_add_content>.berth_add_submit:hover,.berth_add_content>.berth_add_reset:hover{background:#2EB1EA;}
+.berth_add_content>.berth_add_submit:active,.berth_add_content>.berth_add_reset:active{background:#217BA2;}
+
+/*#sss{width:500px;height:80px;resize: none;}*/
+ /*添加锚地弹出框*/
+#anch_select{width:600px;height:400px;top:80px;left:100px;display:none;}
+.anchInfo_select_content{width:100%;height: 20%;margin:20px 20px 0px 40px;}
+
+/*.anchInfo_select_content>div{display:inline-block;height:24px;width:50%;margin-bottom: 10px;float:left;}*/
+.anch_detail_input{display:inline-block;height:24px;width:50%;margin-bottom: 10px;float:left;}
+
+.addAnch_port_select{position:relative;}
+/*.anchInfo_select_content>div>span{display:inline-block;height:24px;line-height:24px;width:80px;text-align:right;font-size: 14px;}*/
+.addAnch_port_select>span:nth-child(2){height:24px;line-height:24px;padding-left:10px;width:140px;text-align:left;font-size:12px;border:1px solid #989898;border-radius: 5px;cursor:pointer;}
+.addAnch_port_select>ul{width:150px;height:100px;background:#fff;position:absolute;z-index:10000;cursor:pointer;top:25px;left:85px;border:1px solid #989898;border-radius:5px;display:none;overflow:hidden;}
+.addAnch_port_select>ul>li{height:20px;line-height:20px;width:140px;padding-left:10px;font-size:12px;color:#323232;}
+.addAnch_port_select>ul>li:hover{background:#24A3D9;color:#fff;}
+.anchInfo_select_content>div>input{width:140px;height:24px;line-height:24px;padding-left:10px;color:#323232;font-size:12px;border-radius:5px;border:1px solid #989898;outline:none;}
+.anchInfo_select_content>div>input:focus{border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;}
+/*.anchInfo_select_content>div:nth-child(3)>span,.anchInfo_select_content>div:last-child>span{height:60px;line-height:60px;position: relative;top:-28px;}*/
+/*#AnchDes,#AnchUse{width:140px;padding-left:10px;height:60px;resize:none;border-radius:5px;}*/
+/*#AnchDes:focus,#AnchUse:focus{border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;}*/
+.addAnch_btn{width:80px;height:32px;line-height:32px;text-align:center;font-size:15px;cursor:pointer;background:#24A3D9;color:#fff;position:absolute;top:160px;left:200px;border:0px solid transparent;border-radius:5px;outline:none;}
+/*{width:60px;height:32px;line-height:32px;text-align:center;font-size:14px;cursor:pointer;background:#24A3D9;color:#fff;position:absolute;top:206px;right:26px;border:0px solid transparent;border-radius:5px;outline:none;}*/
+.addAnch_btn:hover{background:#2EB1EA;}
+.addAnch_btn:active{background:#217BA2;}
+.addAnch_reset{left:320px;}
+#anch_select>.popupBox_DividingLine{top:80px;}
+.onePort_AnchList{width:90%;margin:0 auto;position:relative;top:90px;overflow:hidden;}
+.onePort_AnchList>ul{width:100%;height:20px;}
+.onePort_AnchList>ul>li{width:100%;height:20px;color:#fff;}
+.onePort_AnchList>ul>li>span{display:inline-block;width:40px;height:20px;line-height:20px;text-align:center;font-size:12px;overflow:hidden;white-space:pre;text-overflow:ellipsis;}
+.onePort_AnchList>ul>li>span:nth-child(2){width:100px;}
+.onePort_AnchList>ul>li>span:nth-child(3){width:160px;}
+.onePort_AnchList>ul>li>span:nth-child(4){width:200px;}
+.onePort_AnchList>.onePort_AnchTitle{background:#24A3D9;border-top-left-radius:5px;border-top-right-radius:5px;}
+.onePort_AnchList>.onePort_AnchContent{overflow-y:scroll;height:160px;}
+.onePort_AnchList>.onePort_AnchContent>li{color:#323232;}
+
+/*.onePier_berthContent li{color:#060205;background:#ffffff;cursor:pointer;}*/
+.onePier_berthContent li:hover{color:#fff;background: #2EB1EA;}
+.onePier_berthList>.onePier_berthContent .active{color:#fff;background: #2EB1EA;}
+/*.onePier_berthContent .active{color:#fff;background: #2EB1EA;}*/
+.onePort_AnchContent li:hover{color:#fff;background: #2EB1EA;}
+.onePort_AnchList>.onePort_AnchContent .active{color:#fff;background: #2EB1EA;}
+
+
+/* 锚地管理*/
+/*#anch_manage{width:600px;height:400px;top:80px;left:100px;display:block;}*/
+/*.boxInfo_title{width:100%;height:32px;}*/
+/*.boxInfo_title>span,.stillArea_title>span{display:inline-block;height:30px;line-height:30px;padding-left:270px;color:#24A3D9;font-size:14px;}*/
+/*.boxInfo_title>.portInfo_title_offbtn,.stillArea_title>.stillArea_title_offbtn{width:12px;height:12px;background:url("/images/close_nor.png") no-repeat;float:right;margin-top:9px;margin-right:10px;cursor:pointer;}*/
+/*.boxInfo_title>.portInfo_title_offbtn:hover,.stillArea_title>.stillArea_title_offbtn:hover{background:url("/images/close_over.png") no-repeat;}*/
+/*.boxInfo_title>.portInfo_title_offbtn:active,.stillArea_title>.stillArea_title_offbtn:active{background:url("/images/close_down.png") no-repeat;}*/
+/*.anch_detail_input{display:inline-block;height:24px;width:40%;margin-bottom: 10px;float:left;}*/
+/*.anch_detail_input>span{display:inline-block;height:24px;line-height:24px;width:80px;text-align:right;font-size: 14px;}*/
+/*.description{display:inline-block;height:24px;width:100%;margin-bottom: 10px;float:left;}*/
+/*.description >span{display:inline-block;height:24px;line-height:24px;width:80px;text-align:right;font-size: 14px;}*/
+/*#AnchDes{display:inline-block;width:380px;padding-left:10px;height:24px;resize:none;border-radius:5px;margin-bottom: -10px}*/
+/*.lon_lat_info_list{width:100%;margin:20px 20px 20px 40px;}*/
+/*.lon_lat_list>span{display:inline-block;height:24px;line-height:24px;text-align:right;font-size: 14px;}*/
+/*!*#AnchDes:focus{border:1px solid #00B7FF;box-shadow:0px 0px 1px 1px #00B7FF;}*!*/
